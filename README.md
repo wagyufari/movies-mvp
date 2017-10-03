@@ -1,6 +1,6 @@
 # Popular Movies
 
-This functions the same as any other popular movies app.
+This functions app the same as any other popular movies app.
 
 ## Features
 
