@@ -20,3 +20,7 @@ You must provide your own API key in order to build the app.
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
 * [Google Dagger 2](https://github.com/square/dagger)
 * [Retrofit](https://github.com/square/retrofit)
+
+## Screenshoots
+
+![screen](../master/art/phone-movies.png)
