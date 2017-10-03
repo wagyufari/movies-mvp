@@ -13,39 +13,13 @@ With the app, you can:
 * Watch trailers
 * Read reviews
 
-## How to Work with the Source
+## The Movie Database
 
 This app uses [The Movie Database](https://www.themoviedb.org/documentation/api) API to retrieve movies.
-You must provide your own API key in order to build the app. When you get it, just paste it to:
-    ```
-    app/build.gradle
-    ```
-
-## Screens
-
-![screen](../master/art/phone-movies.png)
-
-![screen](../master/art/phone-details.png)
-
-![screen](../master/art/tablet-port.png)
-
-![screen](../master/art/tablet-land.png)
+You must provide your own API key in order to build the app.
 
 ## Libraries
 
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
-* [Dagger](https://github.com/square/dagger)
+* [Google Dagger 2](https://github.com/square/dagger)
 * [Retrofit](https://github.com/square/retrofit)
-* [SQLBrite](https://github.com/square/sqlbrite)
-* [RxJava](https://github.com/ReactiveX/RxJava)
-* [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-* [Glide](https://github.com/bumptech/glide)
-* [GlidePalette](https://github.com/florent37/GlidePalette)
-* [Android-ObservableScrollView](https://github.com/ksoichiro/Android-ObservableScrollView)
-* [Gradle Retrolambda Plugin](https://github.com/evant/gradle-retrolambda)
-
-## Android Developer Nanodegree
-[![udacity][1]][2]
-
-[1]: ../master/art/nanodegree-logo.png
-[2]: https://www.udacity.com/course/android-developer-nanodegree--nd801
