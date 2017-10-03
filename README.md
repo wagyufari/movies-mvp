@@ -1,9 +1,6 @@
 # Popular Movies
 
-Here is a fully functional and colorful android app which I made from scratch for Android Developer Nanodegree program.
-This app reveals the power of adaptive UI both for phone and tablet devices.
-
-*Popular Movies* was highly evaluated by certified Udacity code reviewer and was graded as "Exceeds Specifications".
+This functions the same as any other popular movies app.
 
 ## Features
 
@@ -20,6 +17,9 @@ You must provide your own API key in order to build the app.
 * [ButterKnife](https://github.com/JakeWharton/butterknife)
 * [Google Dagger 2](https://github.com/square/dagger)
 * [Retrofit](https://github.com/square/retrofit)
+* [Glide](https://github.com/bumptech/glide)
+* [RxJava](https://github.com/ReactiveX/RxJava)
+* [RxAndroid](https://github.com/ReactiveX/RxAndroid.git)
 
 ## Screenshoots
 
