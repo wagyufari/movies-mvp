@@ -20,11 +20,9 @@
         <android.support.v7.widget.CardView
             android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_8dp"
-            android:layout_marginRight="@dimen/dimen_8dp"
             android:layout_marginBottom="@dimen/dimen_8dp"
-            app:cardBackgroundColor="@color/colorWhite"
-            app:cardElevation="0dp">
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/colorWhite">
 
             <RelativeLayout
                 android:layout_width="175dp"
@@ -36,7 +34,7 @@
                     android:layout_height="280dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/error_poster"
-                    app:imageUrl="@{movie.poster_path}"/>
+                    app:imageUrl="@{movie.poster_path}" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -49,9 +47,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:textColor="@color/dove_black"
                         android:maxLines="1"
                         android:text="@{movie.title}"
+                        android:textColor="@color/dove_black"
                         android:textSize="18sp" />
 
                     <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
@@ -60,9 +58,9 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvTitle"
                         android:ellipsize="end"
-                        android:textColor="@color/dove_black"
                         android:maxLines="1"
                         android:text="@{movie.genres}"
+                        android:textColor="@color/dove_black"
                         android:textSize="12sp" />
                 </RelativeLayout>
 

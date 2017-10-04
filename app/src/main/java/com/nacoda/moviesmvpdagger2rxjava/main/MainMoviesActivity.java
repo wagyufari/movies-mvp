@@ -2,6 +2,8 @@ package com.nacoda.moviesmvpdagger2rxjava.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,8 @@ import com.nacoda.moviesmvpdagger2rxjava.mvp.MoviesView;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
 
 import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.inject.Inject;
 
@@ -33,24 +37,17 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
 
     @Inject
     public Service service;
-    @InjectView(R.id.movies_main_backdrop_image_view)
-    ImageView moviesMainBackdropImageView;
-    @InjectView(R.id.movies_main_poster_image_view)
-    ImageView moviesMainPosterImageView;
-    @InjectView(R.id.movies_main_title_text_view)
-    RobotoBold moviesMainTitleTextView;
-    @InjectView(R.id.movies_main_release_date_text_view)
-    RobotoRegular moviesMainReleaseDateTextView;
-    @InjectView(R.id.movies_main_genre_text_view)
-    RobotoLight moviesMainGenreTextView;
-    @InjectView(R.id.movies_main_vote_average_rating_bar)
-    RatingBar moviesMainVoteAverageRatingBar;
+
+    private static int currentPage = 0;
+
     @InjectView(R.id.rv_popular)
     RecyclerView rvPopular;
     @InjectView(R.id.rv_toprated)
     RecyclerView rvToprated;
     @InjectView(R.id.swipeMovies)
     SwipeRefreshLayout swipeMovies;
+    @InjectView(R.id.movies_main_header_slider_view_pager)
+    ViewPager moviesMainHeaderSliderViewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,6 +73,29 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
                 presenter.getTopRatedList(MainMoviesActivity.this);
             }
         });
+    }
+
+    private void initSlider(final MoviesListDao moviesListDao) {
+
+        moviesMainHeaderSliderViewPager.setAdapter(new MoviesSliderAdapter(MainMoviesActivity.this, moviesListDao));
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == 6) {
+                    currentPage = 0;
+                }
+                moviesMainHeaderSliderViewPager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);
     }
 
     public void initFlubber() {
@@ -129,25 +149,13 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
                 moviesListDao.getResults().get(0).getGenre_ids(),
                 moviesListDao.getResults().get(0).getVote_average(),
                 moviesListDao.getResults().get(0).getVote_count()
-                );
-        initMainMoviesHeader(movies);
+        );
+        initSlider(moviesListDao);
     }
 
     @Override
     public void getTopRatedListSuccess(MoviesListDao moviesListDao) {
         initMoviesResponse(moviesListDao, rvToprated);
-    }
-
-    public void initMainMoviesHeader(MoviesApiDao moviesApiDao) {
-        String IMAGE_URL = "http://image.tmdb.org/t/p/w780/";
-
-        Glide.with(getApplicationContext()).load(IMAGE_URL + moviesApiDao.getBackdrop_path()).crossFade().override(2200, 2000).centerCrop().into(moviesMainBackdropImageView);
-        Glide.with(getApplicationContext()).load(IMAGE_URL + moviesApiDao.getPoster_path()).crossFade().centerCrop().into(moviesMainPosterImageView);
-
-        moviesMainTitleTextView.setText(moviesApiDao.getTitle());
-        moviesMainReleaseDateTextView.setText(moviesApiDao.getRelease_date());
-        moviesMainGenreTextView.setText(getGenres(moviesApiDao.getGenre_ids()));
-        moviesMainVoteAverageRatingBar.setRating(moviesApiDao.getVote_average() / 2);
     }
 
     public void initMoviesResponse(MoviesListDao moviesListDao, RecyclerView rv_movies) {
