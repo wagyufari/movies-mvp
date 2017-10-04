@@ -35,9 +35,43 @@ public class Service {
         Glide.with(imageView.getContext()).load(url).crossFade().centerCrop().into(imageView);
     }
 
-    public Subscription getMoviesList(final GetMoviesCallback callback) {
+    public Subscription getPopularList(final GetPopularCallback callback) {
 
-        return networkService.getMovies(
+        return networkService.getPopular(
+                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                "en-US"
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends MoviesListDao>>() {
+                    @Override
+                    public Observable<? extends MoviesListDao> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<MoviesListDao>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+                    }
+
+                    @Override
+                    public void onNext(MoviesListDao moviesListDao) {
+                        callback.onSuccess(moviesListDao);
+                    }
+                });
+
+
+    }
+
+    public Subscription getTopRatedList(final GetTopRatedCallback callback) {
+
+        return networkService.getTopRated(
                 "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
                 "en-US"
         )
@@ -70,7 +104,13 @@ public class Service {
     }
 
 
-    public interface GetMoviesCallback {
+    public interface GetPopularCallback {
+        void onSuccess(MoviesListDao moviesListDao);
+
+        void onError(NetworkError networkError);
+    }
+
+    public interface GetTopRatedCallback {
         void onSuccess(MoviesListDao moviesListDao);
 
         void onError(NetworkError networkError);

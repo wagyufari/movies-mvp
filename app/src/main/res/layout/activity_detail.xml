@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+        <data>
 
-        <import type="android.view.View" />
+            <import type="android.view.View" />
 
-        <variable
-            name="movies"
-            type="com.nacoda.moviesmvpdagger2rxjava.models.Movies" />
-    </data>
+            <variable
+                name="movies"
+                type="com.nacoda.moviesmvpdagger2rxjava.models.Movies" />
+        </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

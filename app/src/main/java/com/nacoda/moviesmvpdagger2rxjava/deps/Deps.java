@@ -2,7 +2,7 @@ package com.nacoda.moviesmvpdagger2rxjava.deps;
 
 
 import com.nacoda.moviesmvpdagger2rxjava.main.DetailActivity;
-import com.nacoda.moviesmvpdagger2rxjava.main.MoviesActivity;
+import com.nacoda.moviesmvpdagger2rxjava.main.MainMoviesActivity;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkModule;
 
 import javax.inject.Singleton;
@@ -19,6 +19,6 @@ import dagger.Component;
         NetworkModule.class})
 public interface Deps {
 
-    void inject(MoviesActivity moviesActivity);
+    void inject(MainMoviesActivity mainMoviesActivity);
     void inject(DetailActivity detailActivity);
 }

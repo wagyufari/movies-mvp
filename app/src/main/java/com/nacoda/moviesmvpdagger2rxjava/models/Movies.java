@@ -17,6 +17,9 @@ public class Movies {
     private String release_date;
     private String id;
     private String overview;
+    private String genres;
+    private float vote_average;
+    private float vote_count;
 
     public String getPoster_path() {
         return poster_path;
@@ -90,7 +93,5 @@ public class Movies {
         this.vote_count = vote_count;
     }
 
-    private String genres;
-    private float vote_average;
-    private float vote_count;
+
 }

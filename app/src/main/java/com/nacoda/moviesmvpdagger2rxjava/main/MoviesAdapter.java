@@ -59,8 +59,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         String IMAGE_URL = "http://image.tmdb.org/t/p/w780/";
 
-        Toast.makeText(context, "" + moviesListDao.getResults().get(position).getPoster_path(), Toast.LENGTH_SHORT).show();
-
         String genres = Arrays.toString(moviesListDao.getResults().get(position).getGenre_ids())
                 .replace("28", "Action")
                 .replace("12", "Adventure")
@@ -101,7 +99,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return moviesListDao.getResults().size();
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

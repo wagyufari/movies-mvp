@@ -21,14 +21,35 @@ public class MoviesPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void getMoviesList(final Context context) {
+    public void getPopularList(final Context context) {
 
         view.showWait();
-        Subscription subscription = service.getMoviesList(new Service.GetMoviesCallback() {
+        Subscription subscription = service.getPopularList(new Service.GetPopularCallback() {
             @Override
             public void onSuccess(MoviesListDao moviesListDao) {
                 view.removeWait();
-                view.getMoviesListSuccess(moviesListDao);
+                view.getPopularListSuccess(moviesListDao);
+            }
+
+            @Override
+            public void onError(NetworkError networkError) {
+                view.removeWait();
+                view.onFailure(networkError.getAppErrorMessage());
+            }
+
+        });
+
+        subscriptions.add(subscription);
+    }
+
+    public void getTopRatedList(final Context context) {
+
+        view.showWait();
+        Subscription subscription = service.getTopRatedList(new Service.GetTopRatedCallback() {
+            @Override
+            public void onSuccess(MoviesListDao moviesListDao) {
+                view.removeWait();
+                view.getTopRatedListSuccess(moviesListDao);
             }
 
             @Override

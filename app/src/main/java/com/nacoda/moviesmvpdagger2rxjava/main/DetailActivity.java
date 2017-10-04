@@ -27,7 +27,6 @@ public class DetailActivity extends BaseApp {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getDeps().inject(this);
-        renderView();
         getParcelable();
         initBinding();
         initFlubber();
@@ -40,10 +39,6 @@ public class DetailActivity extends BaseApp {
                 .duration(500)
                 .createFor(findViewById(R.id.flubberLayout))
                 .start();
-    }
-
-    private void renderView() {
-        setContentView(R.layout.activity_detail);
     }
 
     private void initBinding() {

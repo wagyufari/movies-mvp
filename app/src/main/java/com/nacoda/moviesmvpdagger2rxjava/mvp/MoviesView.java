@@ -13,6 +13,8 @@ public interface MoviesView {
 
     void onFailure(String appErrorMessage);
 
-    void getMoviesListSuccess(MoviesListDao moviesListDao);
+    void getPopularListSuccess(MoviesListDao moviesListDao);
+
+    void getTopRatedListSuccess(MoviesListDao moviesListDao);
 
 }

@@ -14,7 +14,13 @@ import rx.Observable;
 public interface NetworkService {
 
     @GET("popular")
-    Observable<MoviesListDao> getMovies(
+    Observable<MoviesListDao> getPopular(
+            @Query("api_key") String api_key,
+            @Query("language") String language
+    );
+
+    @GET("top_rated")
+    Observable<MoviesListDao> getTopRated(
             @Query("api_key") String api_key,
             @Query("language") String language
     );
