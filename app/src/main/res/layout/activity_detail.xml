@@ -15,151 +15,115 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/flubberLayout"
         android:orientation="vertical">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipeDetail"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ScrollView
+            <RelativeLayout
+                android:id="@+id/layoutDetail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="330dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <RelativeLayout
-                    android:id="@+id/layoutDetail"
+                    android:id="@+id/header"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    android:layout_height="330dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="330dp"
+                        android:background="@color/dove_black"
+                        app:imageBackdrop="@{movies.backdrop_path}" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/gradient" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_8dp"
+                    android:layout_alignBottom="@id/header">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        android:background="@color/colorPrimary"
+                        android:padding="20dp"
+                        android:src="@drawable/actor" />
+
+                    <ImageView
+                        android:id="@+id/ivPoster"
+                        android:layout_width="100dp"
+                        android:layout_height="150dp"
+                        app:imageUrl="@{movies.poster_path}" />
 
                     <RelativeLayout
-                        android:id="@+id/header"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp">
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_centerInParent="true"
-                            android:background="@color/colorPrimary"
-                            android:padding="50dp"
-                            android:src="@drawable/film" />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            />
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="100dp"
-                            android:layout_alignParentBottom="true"
-                            android:src="@drawable/gradient" />
-                    </RelativeLayout>
-
-                    <android.support.v7.widget.CardView
-                        android:id="@+id/body"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/header"
-                        android:layout_margin="8dp">
+                        android:layout_centerInParent="true"
+                        android:layout_margin="16dp"
+                        android:layout_toRightOf="@id/ivPoster">
 
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
+                            android:id="@+id/tvTitle"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/header"
-                            android:layout_margin="@dimen/dimen_8dp">
+                            android:text="@{movies.title}"
+                            android:textSize="20sp"
+                            android:textColor="@color/colorWhite"
+                            tools:text="Captain America" />
 
-                            <ImageView
-                                android:layout_width="100dp"
-                                android:layout_height="150dp"
-                                android:background="@color/colorPrimary"
-                                android:padding="20dp"
-                                android:src="@drawable/actor" />
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
+                            android:id="@+id/tvYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvTitle"
+                            android:layout_marginTop="4dp"
+                            android:textColor="@color/colorWhite"
+                            android:text="@{movies.release_date}"
+                            tools:text="14-01-2001" />
 
-                            <ImageView
-                                android:id="@+id/ivPoster"
-                                android:layout_width="100dp"
-                                android:layout_height="150dp" />
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                            android:id="@+id/tvGenres"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvYear"
+                            android:text="@{movies.genres}"
+                            android:textColor="@color/colorWhite"
+                            tools:text="Genre" />
 
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="16dp"
-                                android:layout_toRightOf="@id/ivPoster">
+                        <RatingBar
+                            android:id="@+id/rbMovie"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tvGenres"
+                            android:isIndicator="true"
+                            android:numStars="5"
+                            android:rating="@{movies.vote_average}"
+                            android:stepSize="0.1"
+                            android:theme="@style/RatingBar" />
 
-                                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
-                                    android:id="@+id/tvTitle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@{movies.title}"
-                                    android:textSize="20sp"
-                                    tools:text="Captain America" />
-
-                                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
-                                    android:id="@+id/tvYear"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/tvTitle"
-                                    android:layout_marginTop="4dp"
-                                    android:text="@{movies.release_date}"
-                                    tools:text="14-01-2001" />
-
-                                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
-                                    android:id="@+id/tvGenres"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/tvYear"
-                                    android:text="@{movies.genres}"
-                                    tools:text="Genre" />
-
-                                <RatingBar
-                                    android:id="@+id/rbMovie"
-                                    style="?android:attr/ratingBarStyleSmall"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/tvGenres"
-                                    android:isIndicator="true"
-                                    android:numStars="5"
-                                    android:stepSize="0.1"
-                                    android:theme="@style/RatingBar" />
-
-                            </RelativeLayout>
-
-                        </RelativeLayout>
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp" />
-
-                    </android.support.v7.widget.CardView>
-
-                    <!--<com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold-->
-                        <!--android:id="@+id/tvActors"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_below="@id/body"-->
-                        <!--android:layout_margin="@dimen/dimen_8dp"-->
-                        <!--android:text="Actors"-->
-                        <!--android:textColor="@color/colorPrimary"-->
-                        <!--android:textSize="30sp" />-->
-
-                    <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:id="@+id/rvCredits"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_below="@id/tvActors"-->
-                        <!--android:layout_margin="@dimen/dimen_8dp"-->
-                        <!--app:adapter="@{vm.bCreditsAdapter}"-->
-                        <!--app:layoutManager="@{vm.bLayoutManager}" />-->
+                    </RelativeLayout>
 
                 </RelativeLayout>
 
-            </ScrollView>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" />
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+            </RelativeLayout>
+
+        </ScrollView>
 
     </android.support.design.widget.CoordinatorLayout>
 </layout>

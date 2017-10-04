@@ -13,14 +13,16 @@ import java.io.File;
  * Created by Mayburger on 10/3/17.
  */
 
-public class BaseApp  extends AppCompatActivity {
+public class BaseApp extends AppCompatActivity {
     Deps deps;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         File cacheFile = new File(getCacheDir(), "responses");
-        deps = DaggerDeps.builder().networkModule(new NetworkModule(cacheFile)).build();
+        deps = DaggerDeps.builder()
+                .networkModule(new NetworkModule(cacheFile))
+                .build();
 
     }
 

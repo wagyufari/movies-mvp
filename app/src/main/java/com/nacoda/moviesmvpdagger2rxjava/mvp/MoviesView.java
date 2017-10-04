@@ -1,6 +1,5 @@
 package com.nacoda.moviesmvpdagger2rxjava.mvp;
 
-import com.nacoda.moviesmvpdagger2rxjava.models.CreditsListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 
 /**

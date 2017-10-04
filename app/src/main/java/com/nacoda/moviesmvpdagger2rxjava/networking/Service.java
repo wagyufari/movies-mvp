@@ -1,6 +1,9 @@
 package com.nacoda.moviesmvpdagger2rxjava.networking;
 
-import com.nacoda.moviesmvpdagger2rxjava.models.CreditsListDao;
+import android.databinding.BindingAdapter;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 
 import rx.Observable;
@@ -20,6 +23,16 @@ public class Service {
 
     public Service(NetworkService networkService) {
         this.networkService = networkService;
+    }
+
+    @BindingAdapter({"bind:imageBackdrop"})
+    public static void loadBackdrop(final ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).crossFade().override(2200,2000).centerCrop().into(imageView);
+    }
+
+    @BindingAdapter({"bind:imageUrl"})
+    public static void loadPoster(final ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).crossFade().centerCrop().into(imageView);
     }
 
     public Subscription getMoviesList(final GetMoviesCallback callback) {
@@ -56,46 +69,6 @@ public class Service {
 
     }
 
-    public Subscription getCreditsList(final GetCreditsCallback callback, String movieId) {
-
-        return networkService.getCredits(
-                movieId,
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
-                "en-US"
-        )
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CreditsListDao>>() {
-                    @Override
-                    public Observable<? extends CreditsListDao> call(Throwable throwable) {
-                        return Observable.error(throwable);
-                    }
-                })
-                .subscribe(new Subscriber<CreditsListDao>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        callback.onError(new NetworkError(e));
-                    }
-
-                    @Override
-                    public void onNext(CreditsListDao creditsListDao) {
-                        callback.onSuccess(creditsListDao);
-                    }
-                });
-
-
-    }
-
-    public interface GetCreditsCallback {
-        void onSuccess(CreditsListDao creditsListDao);
-
-        void onError(NetworkError networkError);
-    }
 
     public interface GetMoviesCallback {
         void onSuccess(MoviesListDao moviesListDao);

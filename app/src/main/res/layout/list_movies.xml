@@ -34,6 +34,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="280dp"
                     android:scaleType="centerCrop"
+                    android:src="@drawable/error_poster"
                     app:imageUrl="@{movie.poster_path}"/>
 
                 <RelativeLayout

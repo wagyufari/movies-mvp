@@ -1,6 +1,5 @@
 package com.nacoda.moviesmvpdagger2rxjava.networking;
 
-import com.nacoda.moviesmvpdagger2rxjava.models.CreditsListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 
 import retrofit2.http.GET;
@@ -19,12 +18,4 @@ public interface NetworkService {
             @Query("api_key") String api_key,
             @Query("language") String language
     );
-
-    @GET("{movieId}/credits")
-    Observable<CreditsListDao> getCredits(
-            @Path("movieId") String movieId,
-            @Query("api_key") String api_key,
-            @Query("language") String language
-    );
-
 }

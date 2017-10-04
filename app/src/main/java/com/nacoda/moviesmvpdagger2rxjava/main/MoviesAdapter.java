@@ -3,14 +3,21 @@ package com.nacoda.moviesmvpdagger2rxjava.main;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.databinding.ListMoviesBinding;
 import com.nacoda.moviesmvpdagger2rxjava.models.Movies;
@@ -52,6 +59,8 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         String IMAGE_URL = "http://image.tmdb.org/t/p/w780/";
 
+        Toast.makeText(context, "" + moviesListDao.getResults().get(position).getPoster_path(), Toast.LENGTH_SHORT).show();
+
         String genres = Arrays.toString(moviesListDao.getResults().get(position).getGenre_ids())
                 .replace("28", "Action")
                 .replace("12", "Adventure")
@@ -88,11 +97,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     public interface OnItemClickListener {
         void onClick(MoviesApiDao Item);
-    }
-
-    @BindingAdapter({"bind:imageUrl"})
-    public static void loadImage(ImageView imageView, String url) {
-        Glide.with(imageView.getContext()).load(url).placeholder(R.drawable.error_poster).into(imageView);
     }
 
     @Override

@@ -18,11 +18,6 @@ public class Movies {
     private String id;
     private String overview;
 
-    @BindingAdapter({"bind:imageMovies"})
-    public static void loadImage(final ImageView view, String imageUrl) {
-        Glide.with(view.getContext()).load(imageUrl).centerCrop().into(view);
-    }
-
     public String getPoster_path() {
         return poster_path;
     }

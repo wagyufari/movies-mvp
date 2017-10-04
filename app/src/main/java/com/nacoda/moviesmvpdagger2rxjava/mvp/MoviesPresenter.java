@@ -3,7 +3,6 @@ package com.nacoda.moviesmvpdagger2rxjava.mvp;
 
 import android.content.Context;
 
-import com.nacoda.moviesmvpdagger2rxjava.models.CreditsListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkError;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
