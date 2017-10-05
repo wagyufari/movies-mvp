@@ -4,7 +4,7 @@ package com.nacoda.moviesmvpdagger2rxjava.models;
  * Created by ASUS on 25/09/2017.
  */
 
-public class MoviesApiDao extends BaseApiDao {
+public class MoviesApiDao extends BaseMoviesApiDao {
 
     private String poster_path;
     private String backdrop_path;

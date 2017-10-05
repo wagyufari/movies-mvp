@@ -17,6 +17,8 @@ import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 import com.nacoda.moviesmvpdagger2rxjava.mvp.MoviesPresenter;
 import com.nacoda.moviesmvpdagger2rxjava.mvp.MoviesView;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
@@ -137,6 +139,11 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
 
     @Override
     public void getMoviesDetailSuccess(DetailApiDao detailApiDao) {
+
+    }
+
+    @Override
+    public void getTrailersSuccess(TrailersListDao trailersListDao) {
 
     }
 

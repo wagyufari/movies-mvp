@@ -95,13 +95,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/activity_runtime_linear_layout"
-            android:layout_marginLeft="@dimen/dimen_16dp"
             android:orientation="vertical">
 
             <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
                 android:id="@+id/activity_detail_overview_title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
                 android:text="@string/storyline"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
@@ -110,8 +110,41 @@
                 android:id="@+id/activity_detail_overview_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_16dp"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:id="@+id/activity_detail_trailers_linear_layout"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dimen_8dp">
+
+                    <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
+                        android:id="@+id/activity_detail_trailers_title_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_16dp"
+                        android:text="@string/trailers"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="18sp" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/activity_detail_rv_trailers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_16dp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>

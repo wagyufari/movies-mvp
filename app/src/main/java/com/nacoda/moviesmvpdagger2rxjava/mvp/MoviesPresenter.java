@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkError;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
 
@@ -72,6 +74,27 @@ public class MoviesPresenter {
             public void onSuccess(DetailApiDao detailApiDao) {
                 view.removeWait();
                 view.getMoviesDetailSuccess(detailApiDao);
+            }
+
+            @Override
+            public void onError(NetworkError networkError) {
+                view.removeWait();
+                view.onFailure(networkError.getAppErrorMessage());
+            }
+
+        }, movieId);
+
+        subscriptions.add(subscription);
+    }
+
+    public void getTrailers(String movieId) {
+
+        view.showWait();
+        Subscription subscription = service.getTrailers(new Service.GetTrailersCallback() {
+            @Override
+            public void onSuccess(TrailersListDao trailersListDao) {
+                view.removeWait();
+                view.getTrailersSuccess(trailersListDao);
             }
 
             @Override

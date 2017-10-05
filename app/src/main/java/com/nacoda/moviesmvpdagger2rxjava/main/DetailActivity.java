@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,9 +23,11 @@ import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold;
 import com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight;
+import com.nacoda.moviesmvpdagger2rxjava.main.adapters.TrailersAdapter;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 import com.nacoda.moviesmvpdagger2rxjava.mvp.MoviesPresenter;
 import com.nacoda.moviesmvpdagger2rxjava.mvp.MoviesView;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
@@ -61,6 +65,10 @@ public class DetailActivity extends BaseApp implements MoviesView {
     RobotoLight activityDetailOverviewTextView;
     @InjectView(R.id.activity_detail_content_relative_layout)
     RelativeLayout activityDetailContentRelativeLayout;
+    @InjectView(R.id.activity_detail_rv_trailers)
+    RecyclerView activityDetailRvTrailers;
+    @InjectView(R.id.activity_detail_trailers_linear_layout)
+    LinearLayout activityDetailTrailersLinearLayout;
 
 
     @Override
@@ -76,7 +84,11 @@ public class DetailActivity extends BaseApp implements MoviesView {
 
     public void initRetrofit() {
         final MoviesPresenter presenter = new MoviesPresenter(service, this);
-        presenter.getMoviesDetail(getIntent().getStringExtra("id"));
+
+        String id = getIntent().getStringExtra("id");
+
+        presenter.getMoviesDetail(id);
+        presenter.getTrailers(id);
 
     }
 
@@ -97,8 +109,7 @@ public class DetailActivity extends BaseApp implements MoviesView {
 
     @Override
     public void removeWait() {
-        dialog.dismiss();
-        activityDetailContentRelativeLayout.setVisibility(View.VISIBLE);
+
     }
 
     @Override
@@ -143,15 +154,32 @@ public class DetailActivity extends BaseApp implements MoviesView {
         }
 
         activityDetailVoteAverageRatingBar.setRating(parcelableMovies.getVote_average() / 2);
+        service.GlideBackdrop(getApplicationContext(), IMAGE_URL + detailApiDao.getBackdrop_path(), activityDetailBackdropImageView);
+    }
 
-        Glide.with(this).load(IMAGE_URL + detailApiDao.getBackdrop_path()).asBitmap().into(new SimpleTarget<Bitmap>(400, 400) {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                Drawable drawable = new BitmapDrawable(resource);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    activityDetailBackdropImageView.setBackground(drawable);
-                }
-            }
-        });
+    @Override
+    public void getTrailersSuccess(TrailersListDao trailersListDao) {
+
+        if (trailersListDao != null){
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            TrailersAdapter adapter = new TrailersAdapter(getApplicationContext(), trailersListDao,
+                    new TrailersAdapter.OnItemClickListener() {
+                        @Override
+                        public void onClick(TrailersListDao item) {
+
+
+                        }
+                    }, service);
+            activityDetailRvTrailers.setAdapter(adapter);
+            activityDetailRvTrailers.setLayoutManager(layoutManager);
+
+            dialog.dismiss();
+            activityDetailContentRelativeLayout.setVisibility(View.VISIBLE);
+        } else {
+            activityDetailTrailersLinearLayout.setVisibility(View.GONE);
+        }
+
     }
 }

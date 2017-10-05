@@ -2,6 +2,8 @@ package com.nacoda.moviesmvpdagger2rxjava.networking;
 
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -31,5 +33,11 @@ public interface NetworkService {
             @Path("movieId") String movieId,
             @Query("api_key") String api_key,
             @Query("language") String language
+    );
+
+    @GET("{movieId}/videos")
+    Observable<TrailersListDao> getTrailers(
+            @Path("movieId") String movieId,
+            @Query("api_key") String api_key
     );
 }

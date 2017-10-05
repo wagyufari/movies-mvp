@@ -1,14 +1,10 @@
 package com.nacoda.moviesmvpdagger2rxjava.models;
 
-import com.nacoda.moviesmvpdagger2rxjava.models.BaseApiDao;
-
-import java.util.List;
-
 /**
  * Created by ASUS on 25/09/2017.
  */
 
-public class DetailApiDao extends BaseApiDao {
+public class DetailApiDao extends BaseMoviesApiDao {
 
     private String backdrop_path;
     private String budget;
