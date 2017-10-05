@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#2b2b2b</color>
     <color name="colorAccent">#3f3f3f</color>
     <color name="colorWhite">#fff</color>
+
+    <color name="colorImagePlaceholder">#f2f2f2</color>
+
     <color name="colorBlack">#000</color>
     <color name="dove_black">#212225</color>
 </resources>

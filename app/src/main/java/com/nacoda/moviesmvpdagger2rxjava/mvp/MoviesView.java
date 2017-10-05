@@ -1,5 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.mvp;
 
+import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 
 /**
@@ -16,5 +17,7 @@ public interface MoviesView {
     void getPopularListSuccess(MoviesListDao moviesListDao);
 
     void getTopRatedListSuccess(MoviesListDao moviesListDao);
+
+    void getMoviesDetailSuccess(DetailApiDao detailApiDao);
 
 }

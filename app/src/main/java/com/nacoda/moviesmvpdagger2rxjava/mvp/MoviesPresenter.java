@@ -3,6 +3,7 @@ package com.nacoda.moviesmvpdagger2rxjava.mvp;
 
 import android.content.Context;
 
+import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkError;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
@@ -21,7 +22,7 @@ public class MoviesPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void getPopularList(final Context context) {
+    public void getPopularList() {
 
         view.showWait();
         Subscription subscription = service.getPopularList(new Service.GetPopularCallback() {
@@ -42,7 +43,7 @@ public class MoviesPresenter {
         subscriptions.add(subscription);
     }
 
-    public void getTopRatedList(final Context context) {
+    public void getTopRatedList() {
 
         view.showWait();
         Subscription subscription = service.getTopRatedList(new Service.GetTopRatedCallback() {
@@ -59,6 +60,27 @@ public class MoviesPresenter {
             }
 
         });
+
+        subscriptions.add(subscription);
+    }
+
+    public void getMoviesDetail(String movieId) {
+
+        view.showWait();
+        Subscription subscription = service.getMoviesDetail(new Service.GetMoviesDetailCallback() {
+            @Override
+            public void onSuccess(DetailApiDao detailApiDao) {
+                view.removeWait();
+                view.getMoviesDetailSuccess(detailApiDao);
+            }
+
+            @Override
+            public void onError(NetworkError networkError) {
+                view.removeWait();
+                view.onFailure(networkError.getAppErrorMessage());
+            }
+
+        }, movieId);
 
         subscriptions.add(subscription);
     }

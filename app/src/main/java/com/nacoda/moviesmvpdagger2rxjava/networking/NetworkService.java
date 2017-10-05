@@ -1,5 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.networking;
 
+import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 
 import retrofit2.http.GET;
@@ -21,6 +22,13 @@ public interface NetworkService {
 
     @GET("top_rated")
     Observable<MoviesListDao> getTopRated(
+            @Query("api_key") String api_key,
+            @Query("language") String language
+    );
+
+    @GET("{movieId}")
+    Observable<DetailApiDao> getMoviesDetail(
+            @Path("movieId") String movieId,
             @Query("api_key") String api_key,
             @Query("language") String language
     );

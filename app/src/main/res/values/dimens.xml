@@ -5,4 +5,6 @@
     <dimen name="dimen_16dp">16dp</dimen>
     <dimen name="dimen_4dp">4dp</dimen>
     <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_32dp">32dp</dimen>
 </resources>

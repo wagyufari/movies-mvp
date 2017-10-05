@@ -13,13 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".main.MainMoviesActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".main.DetailActivity">
+        <activity
+            android:name=".main.DetailActivity"
+            android:theme="@style/MyMaterialTheme"></activity>
+        <activity android:name=".main.MoviesActivity">
 
         </activity>
     </application>

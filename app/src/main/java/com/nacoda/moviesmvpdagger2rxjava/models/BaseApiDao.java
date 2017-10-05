@@ -8,12 +8,7 @@ import java.util.List;
 
 public class BaseApiDao<T> {
 
-    private List<T> cast;
     private List<T> results;
-
-    public List<T> getCast() {
-        return cast;
-    }
 
     public List<T> getResults() {
         return results;
