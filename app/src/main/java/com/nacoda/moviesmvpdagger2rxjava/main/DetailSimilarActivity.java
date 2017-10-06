@@ -15,13 +15,17 @@ import android.widget.RelativeLayout;
 
 import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
 import com.nacoda.moviesmvpdagger2rxjava.R;
+import com.nacoda.moviesmvpdagger2rxjava.databinding.ActivityDetailBinding;
 import com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold;
 import com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.MoviesSimilarAdapter;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.TrailersAdapter;
+import com.nacoda.moviesmvpdagger2rxjava.models.Detail;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.Movies;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
+import com.nacoda.moviesmvpdagger2rxjava.models.Settings;
 import com.nacoda.moviesmvpdagger2rxjava.models.SimilarApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
@@ -42,49 +46,27 @@ import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
 
 public class DetailSimilarActivity extends BaseApp implements MoviesView {
 
+    @Inject Service service;
+    @Inject Gliding gliding;
+    @Inject Parcefy parcefy;
+    @Inject Utils utils;
     @Inject
-    public Service service;
+    Detail detail;
     @Inject
-    Gliding gliding;
+    Movies movies;
     @Inject
-    Parcefy parcefy;
-    @Inject
-    Utils utils;
-
+    Settings settings;
 
     ParcelableMovies parcelableMovies;
-
     Dialog dialog;
-    @InjectView(R.id.activity_detail_backdrop_image_view)
-    ImageView activityDetailBackdropImageView;
-    @InjectView(R.id.activity_detail_title_text_view)
-    RobotoBold activityDetailTitleTextView;
-    @InjectView(R.id.activity_detail_tagline_text_view)
-    RobotoLight activityDetailTaglineTextView;
-    @InjectView(R.id.activity_detail_runtime_text_view)
-    RobotoLight activityDetailRuntimeTextView;
-    @InjectView(R.id.activity_detail_overview_text_view)
-    RobotoLight activityDetailOverviewTextView;
 
-    @InjectView(R.id.activity_detail_vote_average_rating_bar)
-    RatingBar activityDetailVoteAverageRatingBar;
-
-    @InjectView(R.id.activity_detail_runtime_icon_image_view)
-    ImageView activityDetailRuntimeIconImageView;
-
-    @InjectView(R.id.activity_runtime_linear_layout)
-    LinearLayout activityRuntimeLinearLayout;
-    @InjectView(R.id.activity_detail_trailers_linear_layout)
-    LinearLayout activityDetailTrailersLinearLayout;
-    @InjectView(R.id.activity_detail_similar_linear_layout)
-    LinearLayout activityDetailSimilarLinearLayout;
     @InjectView(R.id.activity_detail_content_relative_layout)
     RelativeLayout activityDetailContentRelativeLayout;
-
     @InjectView(R.id.activity_detail_rv_trailers)
     RecyclerView activityDetailRvTrailers;
     @InjectView(R.id.activity_detail_rv_similar)
     RecyclerView activityDetailRvSimilar;
+    ActivityDetailBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -159,18 +141,12 @@ public class DetailSimilarActivity extends BaseApp implements MoviesView {
 
     @Override
     public void getMoviesDetailSuccess(DetailApiDao detailApiDao) {
+        utils.bindDetails(detail, detailApiDao);
+        utils.bindMoviesParcelable(movies, parcelableMovies);
 
-        activityDetailTitleTextView.setText(parcelableMovies.getTitle());
-        activityDetailRuntimeTextView.setText(detailApiDao.getRuntime() + " Minutes");
-        activityDetailOverviewTextView.setText(parcelableMovies.getOverview());
-
-        if (detailApiDao.getTagline() != null) {
-            activityDetailTaglineTextView.setVisibility(View.VISIBLE);
-            activityDetailTaglineTextView.setText(detailApiDao.getTagline());
-        }
-
-        activityDetailVoteAverageRatingBar.setRating(parcelableMovies.getVote_average() / 2);
-        gliding.GlideBackdrop(getApplicationContext(), IMAGE_URL + detailApiDao.getBackdrop_path(), activityDetailBackdropImageView);
+        binding.setMovies(movies);
+        binding.setDetail(detail);
+        binding.setSettings(settings);
     }
 
     @Override

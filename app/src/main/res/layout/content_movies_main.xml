@@ -39,21 +39,60 @@
 
                     </RelativeLayout>
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dimen_8dp">
+
+                        <View
+                            android:layout_width="10dp"
+                            android:layout_height="50dp"
+                            android:background="@color/taupe" />
+
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="@dimen/dimen_8dp"
+                            android:text="@string/popular"
+                            android:textColor="@color/white"
+                            android:textSize="25sp" />
+
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                            android:id="@+id/activity_movies_main_popular_see_all_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|center_vertical"
+                            android:layout_margin="@dimen/dimen_16dp"
+                            android:text="@string/see_all"
+                            android:textAlignment="textEnd"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/activity_movies_main_rv_popular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/dimen_8dp">
 
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/dimen_8dp"
-                            android:text="@string/popular"
+                            android:text="@string/top_rated"
                             android:textColor="@color/white"
-                            android:textSize="30sp" />
+                            android:textSize="25sp" />
 
                         <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
-                            android:id="@+id/activity_movies_main_popular_see_all_text_view"
+                            android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -64,39 +103,6 @@
                             android:textSize="15sp" />
 
                     </RelativeLayout>
-
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/activity_movies_main_rv_popular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/dimen_8dp">
-
-                            <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_8dp"
-                                android:text="@string/top_rated"
-                                android:textColor="@color/white"
-                                android:textSize="30sp" />
-
-                            <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
-                                android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_margin="@dimen/dimen_16dp"
-                                android:text="@string/see_all"
-                                android:textColor="@color/white"
-                                android:textSize="15sp" />
-
-                        </RelativeLayout>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_toprated"

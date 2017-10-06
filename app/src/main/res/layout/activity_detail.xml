@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <profileData>
+    <data>
 
         <variable
             name="movies"
@@ -15,7 +15,7 @@
         <variable
             name="settings"
             type="com.nacoda.moviesmvpdagger2rxjava.models.Settings" />
-    </profileData>
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
