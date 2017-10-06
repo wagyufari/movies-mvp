@@ -2,6 +2,7 @@ package com.nacoda.moviesmvpdagger2rxjava.mvp;
 
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 
@@ -23,5 +24,7 @@ public interface MoviesView {
     void getMoviesDetailSuccess(DetailApiDao detailApiDao);
 
     void getTrailersSuccess(TrailersListDao trailersListDao);
+
+    void getSimilarSuccess(SimilarListDao similarListDao);
 
 }

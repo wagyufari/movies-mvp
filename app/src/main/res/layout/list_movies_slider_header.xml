@@ -54,7 +54,7 @@
                 android:id="@+id/movies_main_title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 tools:text="Captain America" />
 
@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movies_main_title_text_view"
                 android:layout_marginTop="4dp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 tools:text="14-01-2001" />
 
             <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/movies_main_release_date_text_view"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/white"
                 tools:text="Genre" />
 
             <RatingBar

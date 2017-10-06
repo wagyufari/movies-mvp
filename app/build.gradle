@@ -50,4 +50,5 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     provided 'javax.annotation:jsr250-api:1.0'
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }

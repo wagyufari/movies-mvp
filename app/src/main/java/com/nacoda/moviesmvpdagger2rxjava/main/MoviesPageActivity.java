@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.appolica.flubber.Flubber;
 import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
@@ -39,7 +38,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class MoviesActivity extends BaseApp implements MoviesView {
+public class MoviesPageActivity extends BaseApp implements MoviesView {
 
     @Inject
     public Service service;
@@ -57,12 +56,13 @@ public class MoviesActivity extends BaseApp implements MoviesView {
     RecyclerView rvMovies;
     @InjectView(R.id.activity_movies_swipe_refresh_layout_movies)
     SwipeRefreshLayout swipeRefreshLayoutMovies;
+    @InjectView(R.id.activity_movies_pages_text_view)
+    TextView activityMoviesPagesTextView;
     @InjectView(R.id.activity_movies_arrow_left)
     View activityMoviesArrowLeft;
     @InjectView(R.id.activity_movies_arrow_right)
     View activityMoviesArrowRight;
-    @InjectView(R.id.activity_movies_pages_text_view)
-    TextView activityMoviesPagesTextView;
+
 
     int page;
     String category;
@@ -75,12 +75,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
         renderView();
         ButterKnife.inject(this);
 
-        if (getIntent().getIntExtra("page", 0) == 0) {
-            page = getIntent().getIntExtra("page", 0);
-        } else {
-            page = getIntent().getIntExtra("page", 0);
-        }
-
+        page = getIntent().getIntExtra("page", 0);
         category = getIntent().getStringExtra("category");
         total_pages = getIntent().getStringExtra("total_pages");
 
@@ -115,7 +110,12 @@ public class MoviesActivity extends BaseApp implements MoviesView {
     }
 
     public void initFlubber() {
-        Flubber.with().animation(Flubber.AnimationPreset.FADE_IN).repeatCount(0).duration(300).createFor(rvMovies).start();
+        Flubber.with()
+                .animation(Flubber.AnimationPreset.FADE_IN)
+                .repeatCount(0)
+                .duration(300)
+                .createFor(rvMovies)
+                .start();
     }
 
     public void renderView() {
@@ -145,6 +145,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
 
     @Override
     public void getPopularListSuccess(MoviesListDao moviesListDao) {
+
         if (page == Integer.parseInt(moviesListDao.getTotal_pages())) {
             activityMoviesArrowRight.setVisibility(View.GONE);
         }
@@ -185,7 +186,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                         String genres = utils.getGenres(item.getGenre_ids());
                         ParcelableMovies movies = parcefy.fillMoviesParcelable(item, genres);
 
-                        Intent detail = new Intent(MoviesActivity.this, DetailActivity.class);
+                        Intent detail = new Intent(MoviesPageActivity.this, DetailActivity.class);
                         detail.putExtra("parcelableMovies", movies);
                         detail.putExtra("id", item.getId());
                         startActivity(detail);
@@ -199,7 +200,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
 
     @OnClick({R.id.activity_movies_arrow_left, R.id.activity_movies_arrow_right, R.id.activity_movies_pages_relative_layout})
     public void onClick(View view) {
-        Intent movies = new Intent(MoviesActivity.this, MoviesPageActivity.class);
+        Intent movies = new Intent(MoviesPageActivity.this, MoviesActivity.class);
         switch (view.getId()) {
             case R.id.activity_movies_arrow_left:
                 movies.putExtra("category", category);
@@ -217,8 +218,8 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                 break;
             case R.id.activity_movies_pages_relative_layout:
                 Dialog jump = new Dialog(this);
-                jump.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 jump.setContentView(R.layout.pages_dialog);
+                jump.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 final EditText pagesDialogJumpEditText = (EditText) jump.findViewById(R.id.pages_dialog_jump_edit_text);
                 jump.show();
 
@@ -232,23 +233,12 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                                 {
                                     case KeyEvent.KEYCODE_DPAD_CENTER:
                                     case KeyEvent.KEYCODE_ENTER:
-
-
-                                        if (pagesDialogJumpEditText.getText().toString().isEmpty()){
-                                            Toast.makeText(MoviesActivity.this, "Field cannot be empty", Toast.LENGTH_SHORT).show();
-                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) > Integer.parseInt(total_pages)){
-                                            Toast.makeText(MoviesActivity.this, "Max pages exceeded", Toast.LENGTH_SHORT).show();
-                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) <= 0){
-                                            Toast.makeText(MoviesActivity.this, "Can't be less than 1", Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Intent movies = new Intent(MoviesActivity.this, MoviesPageActivity.class);
-                                            movies.putExtra("category", category);
-                                            movies.putExtra("page", Integer.parseInt(pagesDialogJumpEditText.getText().toString()));
-                                            movies.putExtra("total_pages", total_pages);
-                                            startActivity(movies);
-                                            finish();
-                                        }
-
+                                        Intent movies = new Intent(MoviesPageActivity.this, MoviesActivity.class);
+                                        movies.putExtra("category", category);
+                                        movies.putExtra("page", Integer.parseInt(pagesDialogJumpEditText.getText().toString()));
+                                        movies.putExtra("total_pages", total_pages);
+                                        startActivity(movies);
+                                        finish();
                                         return true;
                                     default:
                                         break;

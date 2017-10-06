@@ -22,14 +22,49 @@
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-            <com.nacoda.moviesmvpdagger2rxjava.fonts.Montez
-                android:id="@+id/activity_movies_title_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="Discover"
-                android:textColor="@color/colorWhite"
-                android:textSize="50sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/activity_movies_pages_relative_layout">
+
+                <com.nacoda.moviesmvpdagger2rxjava.fonts.Montez
+                    android:id="@+id/activity_movies_title_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="Discover"
+                    android:textColor="@color/white"
+                    android:textSize="50sp" />
+
+                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                    android:id="@+id/activity_movies_pages_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/activity_movies_title_text_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/dimen_4dp"
+                    android:text="Hello" />
+
+            </RelativeLayout>
+
+
+            <View
+                android:id="@+id/activity_movies_arrow_left"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow_left"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/activity_movies_arrow_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/arrow_right"
+                android:visibility="gone" />
+
 
         </RelativeLayout>
 

@@ -18,7 +18,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/white</item>
         <item name="colorControlActivated">#f1eb3d</item>
     </style>
 

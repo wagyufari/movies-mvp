@@ -1,4 +1,7 @@
-package com.nacoda.moviesmvpdagger2rxjava.networking;
+package com.nacoda.moviesmvpdagger2rxjava.dagger.modules;
+
+import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkService;
+import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,7 +76,6 @@ public class NetworkModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-
                 .build();
     }
 
@@ -88,10 +90,11 @@ public class NetworkModule {
     @Provides
     @Singleton
     @SuppressWarnings("unused")
-    public Service providesService(
-            NetworkService networkService) {
+    public Service providesService(NetworkService networkService) {
         return new Service(networkService);
     }
+
+
 
 
 

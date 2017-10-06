@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkError;
@@ -24,7 +25,7 @@ public class MoviesPresenter {
         this.subscriptions = new CompositeSubscription();
     }
 
-    public void getPopularList() {
+    public void getPopularList(int page) {
 
         view.showWait();
         Subscription subscription = service.getPopularList(new Service.GetPopularCallback() {
@@ -40,12 +41,12 @@ public class MoviesPresenter {
                 view.onFailure(networkError.getAppErrorMessage());
             }
 
-        });
+        }, page);
 
         subscriptions.add(subscription);
     }
 
-    public void getTopRatedList() {
+    public void getTopRatedList(int page) {
 
         view.showWait();
         Subscription subscription = service.getTopRatedList(new Service.GetTopRatedCallback() {
@@ -61,7 +62,7 @@ public class MoviesPresenter {
                 view.onFailure(networkError.getAppErrorMessage());
             }
 
-        });
+        }, page);
 
         subscriptions.add(subscription);
     }
@@ -95,6 +96,27 @@ public class MoviesPresenter {
             public void onSuccess(TrailersListDao trailersListDao) {
                 view.removeWait();
                 view.getTrailersSuccess(trailersListDao);
+            }
+
+            @Override
+            public void onError(NetworkError networkError) {
+                view.removeWait();
+                view.onFailure(networkError.getAppErrorMessage());
+            }
+
+        }, movieId);
+
+        subscriptions.add(subscription);
+    }
+
+    public void getSimilar(String movieId) {
+
+        view.showWait();
+        Subscription subscription = service.getSimilar(new Service.GetSimilarCallback() {
+            @Override
+            public void onSuccess(SimilarListDao similarListDao) {
+                view.removeWait();
+                view.getSimilarSuccess(similarListDao);
             }
 
             @Override

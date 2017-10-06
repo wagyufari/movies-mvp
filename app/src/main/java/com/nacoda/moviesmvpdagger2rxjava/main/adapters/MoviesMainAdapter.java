@@ -1,7 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.main.adapters;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,29 +12,31 @@ import com.bumptech.glide.Glide;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
-import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
-
-import javax.inject.Inject;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import static com.nacoda.moviesmvpdagger2rxjava.URL.IMAGE_URL;
+import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
 
 
 public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.ViewHolder> {
 
     private Context context;
     private MoviesListDao moviesListDao;
-    private Service service;
-    private final OnItemClickListener listener;
+    private Utils utils;
+    private Gliding gliding;
 
-    public MoviesMainAdapter(Context context, MoviesListDao moviesListDao, OnItemClickListener listener, Service service) {
+    public MoviesMainAdapter(Context context, MoviesListDao moviesListDao, Utils utils, Gliding gliding, OnItemClickListener listener) {
         this.context = context;
         this.moviesListDao = moviesListDao;
+        this.utils = utils;
+        this.gliding = gliding;
         this.listener = listener;
-        this.service = service;
     }
+
+    private final OnItemClickListener listener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -46,7 +47,7 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        String genres = service.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
+        String genres = utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
 
         holder.listMoviesTitleTextView.setText(moviesListDao.getResults().get(position).getTitle());
         holder.listMoviesGenresTextView.setText(genres);

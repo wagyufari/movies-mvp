@@ -3,10 +3,26 @@
     <color name="colorPrimary">#3f3f3f</color>
     <color name="colorPrimaryDark">#2b2b2b</color>
     <color name="colorAccent">#3f3f3f</color>
-    <color name="colorWhite">#fff</color>
+
 
     <color name="colorImagePlaceholder">#f2f2f2</color>
 
-    <color name="colorBlack">#000</color>
+    <color name="black">#000</color>
     <color name="dove_black">#212225</color>
+    <color name="white">#fff</color>
+    <color name="dim_gray">#696969</color>
+    <color name="ebony">#555D50</color>
+    <color name="taupe">#483C32</color>
+    <color name="davys_gray">#555555</color>
+    <color name="charcoal">#36454F</color>
+    <color name="outer_space">#414A4C</color>
+    <color name="black_olive">#3B3C36</color>
+    <color name="onyx">#353839</color>
+    <color name="jet_black">#343434</color>
+    <color name="leather_jacket_black">#253529</color>
+    <color name="raisin_black">#242124</color>
+    <color name="light_black">#1A1110</color>
+
+
+
 </resources>

@@ -8,11 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.nacoda.moviesmvpdagger2rxjava.R;
-import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
-import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
-import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -20,49 +21,54 @@ import butterknife.InjectView;
 import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
 
 
-public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
+public class MoviesSimilarAdapter extends RecyclerView.Adapter<MoviesSimilarAdapter.ViewHolder> {
 
     private Context context;
-    private MoviesListDao moviesListDao;
+    private SimilarListDao similarListDao;
+    private Utils utils;
+    private Gliding gliding;
 
-    public MoviesAdapter(Context context, MoviesListDao moviesListDao, Utils utils, Gliding gliding, OnItemClickListener listener) {
+    public MoviesSimilarAdapter(Context context, SimilarListDao similarListDao, Utils utils, Gliding gliding, OnItemClickListener listener) {
         this.context = context;
-        this.moviesListDao = moviesListDao;
+        this.similarListDao = similarListDao;
         this.utils = utils;
         this.gliding = gliding;
         this.listener = listener;
     }
 
-    private Utils utils;
-    private Gliding gliding;
-
     private final OnItemClickListener listener;
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_movies, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_similar, null);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        String genres = utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
+        String genres = utils.getGenres(similarListDao.getResults().get(position).getGenre_ids());
 
-        holder.listMoviesTitleTextView.setText(moviesListDao.getResults().get(position).getTitle());
+        holder.listMoviesTitleTextView.setText(similarListDao.getResults().get(position).getTitle());
         holder.listMoviesGenresTextView.setText(genres);
-        gliding.GlidePoster(context,IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path(),holder.listMoviesPosterImageView);
-        holder.click(moviesListDao.getResults().get(position), listener);
+
+        Glide.with(context).load(IMAGE_URL + similarListDao.getResults().get(position).getPoster_path())
+                .crossFade()
+                .centerCrop()
+                .into(holder.listMoviesPosterImageView);
+
+        holder.click(similarListDao.getResults().get(position), listener);
 
     }
 
     public interface OnItemClickListener {
-        void onClick(MoviesApiDao Item);
+        void onClick(SimilarApiDao Item);
     }
 
     @Override
     public int getItemCount() {
-        return moviesListDao.getResults().size();
+        return 6;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -79,11 +85,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         }
 
-        public void click(final MoviesApiDao moviesApiDao, final OnItemClickListener listener) {
+        public void click(final SimilarApiDao similarApiDao, final OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onClick(moviesApiDao);
+                    listener.onClick(similarApiDao);
                 }
             });
         }

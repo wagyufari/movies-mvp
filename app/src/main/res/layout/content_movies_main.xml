@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -28,7 +29,7 @@
                         android:id="@+id/activity_movies_main_detail_linear_layout"
                         android:layout_width="match_parent"
                         android:layout_height="330dp"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior">z
 
                         <android.support.v4.view.ViewPager
                             android:id="@+id/activity_movies_main_header_slider_view_pager"
@@ -38,76 +39,64 @@
 
                     </RelativeLayout>
 
-                    <android.support.v7.widget.CardView
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_8dp"
-                        app:cardBackgroundColor="@color/colorPrimary">
+                        android:layout_margin="@dimen/dimen_8dp">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_8dp"
+                            android:text="@string/popular"
+                            android:textColor="@color/white"
+                            android:textSize="30sp" />
 
-                            <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="@dimen/dimen_8dp"
-                                android:text="@string/popular"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="30sp" />
+                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                            android:id="@+id/activity_movies_main_popular_see_all_text_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="@dimen/dimen_16dp"
+                            android:text="@string/see_all"
+                            android:textColor="@color/white"
+                            android:textSize="15sp" />
 
-                            <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/activity_movies_main_popular_see_all_text_view"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:layout_margin="@dimen/dimen_16dp"
-                                android:text="@string/see_all"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="15sp" />
+                    </RelativeLayout>
 
-                        </RelativeLayout>
-
-                    </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_popular"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <android.support.v7.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_8dp"
-                        app:cardBackgroundColor="@color/colorPrimary">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/dimen_8dp">
 
                             <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="@dimen/dimen_8dp"
                                 android:text="@string/top_rated"
-                                android:textColor="@color/colorWhite"
+                                android:textColor="@color/white"
                                 android:textSize="30sp" />
 
                             <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                                android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
                                 android:layout_margin="@dimen/dimen_16dp"
-                                android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
                                 android:text="@string/see_all"
-                                android:textColor="@color/colorWhite"
+                                android:textColor="@color/white"
                                 android:textSize="15sp" />
 
                         </RelativeLayout>
-
-                    </android.support.v7.widget.CardView>
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_toprated"

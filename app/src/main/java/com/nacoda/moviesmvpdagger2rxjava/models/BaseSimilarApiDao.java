@@ -6,7 +6,7 @@ import java.util.List;
  * Created by ASUS on 25/09/2017.
  */
 
-public class BaseMoviesApiDao<T> {
+public class BaseSimilarApiDao<T> {
 
     private List<T> results;
     private String total_pages;

@@ -20,6 +20,8 @@ import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarApiDao;
+import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 
@@ -40,27 +42,16 @@ public class Service {
 
     private final NetworkService networkService;
 
-    public void GlideBackdrop(Context context, String url, final View view){
-        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>(400, 400) {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                Drawable drawable = new BitmapDrawable(resource);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackground(drawable);
-                }
-            }
-        });
-    }
-
     public Service(NetworkService networkService) {
         this.networkService = networkService;
     }
 
-    public Subscription getPopularList(final GetPopularCallback callback) {
+    public Subscription getPopularList(final GetPopularCallback callback, int page) {
 
         return networkService.getPopular(
                 "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
-                "en-US"
+                "en-US",
+                String.valueOf(page)
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,11 +81,12 @@ public class Service {
 
     }
 
-    public Subscription getTopRatedList(final GetTopRatedCallback callback) {
+    public Subscription getTopRatedList(final GetTopRatedCallback callback, int page) {
 
         return networkService.getTopRated(
                 "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
-                "en-US"
+                "en-US",
+                String.valueOf(page)
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -193,68 +185,36 @@ public class Service {
 
     }
 
-    public ParcelableMovies fillParcelable(MoviesApiDao item, String genres) {
-        ParcelableMovies parcelableMovies = new ParcelableMovies(
-                item.getPoster_path(),
-                item.getBackdrop_path(),
-                item.getTitle(),
-                item.getRelease_date(),
-                item.getId(),
-                item.getOverview(),
-                genres,
-                item.getVote_average(),
-                item.getVote_count()
-        );
-        return parcelableMovies;
-    }
+    public Subscription getSimilar(final GetSimilarCallback callback, String movieId) {
 
-    public ParcelableMovies fillParcelableList(MoviesListDao item, String genres, int position) {
-        ParcelableMovies parcelableMovies = new ParcelableMovies(
-                item.getResults().get(position).getPoster_path(),
-                item.getResults().get(position).getBackdrop_path(),
-                item.getResults().get(position).getTitle(),
-                item.getResults().get(position).getRelease_date(),
-                item.getResults().get(position).getId(),
-                item.getResults().get(position).getOverview(),
-                genres,
-                item.getResults().get(position).getVote_average(),
-                item.getResults().get(position).getVote_count()
-        );
-        return parcelableMovies;
-    }
+        return networkService.getSimilar(
+                movieId,
+                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3"
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends SimilarListDao>>() {
+                    @Override
+                    public Observable<? extends SimilarListDao> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<SimilarListDao>() {
+                    @Override
+                    public void onCompleted() {
 
-    public String getGenres(String[] data) {
-        String genres = Arrays.toString(data)
-                .replace("28", "Action")
-                .replace("12", "Adventure")
-                .replace("16", "Animation")
-                .replace("35", "Comedy")
-                .replace("80", "Crime")
-                .replace("99", "Documentary")
-                .replace("18", "Drama")
-                .replace("14", "Fantasy")
-                .replace("27", "Horror")
-                .replace("10402", "Music")
-                .replace("9648", "Mystery")
-                .replace("10749", "Romance")
-                .replace("878", "Science Fiction")
-                .replace("10770", "TV Movie")
-                .replace("10752", "War")
-                .replace("37", "Western")
-                .replace("10751", "Family")
-                .replace("53", "Thriller")
-                .replace("[", "")
-                .replace("]", "");
-        return genres;
-    }
+                    }
 
-    public void initFadeinFlubber(View view) {
-        Flubber.with()
-                .animation(Flubber.AnimationPreset.FADE_IN)
-                .repeatCount(0)
-                .duration(300)
-                .createFor(view)
-                .start();
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+                    }
+
+                    @Override
+                    public void onNext(SimilarListDao similarListDao) {
+                        callback.onSuccess(similarListDao);
+                    }
+                });
     }
 
 
@@ -272,6 +232,12 @@ public class Service {
 
     public interface GetTrailersCallback {
         void onSuccess(TrailersListDao trailersListDao);
+
+        void onError(NetworkError networkError);
+    }
+
+    public interface GetSimilarCallback {
+        void onSuccess(SimilarListDao similarListDao);
 
         void onError(NetworkError networkError);
     }

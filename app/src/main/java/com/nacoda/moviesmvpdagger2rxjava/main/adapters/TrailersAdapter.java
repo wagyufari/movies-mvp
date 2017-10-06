@@ -1,44 +1,33 @@
 package com.nacoda.moviesmvpdagger2rxjava.main.adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
-import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-import static com.nacoda.moviesmvpdagger2rxjava.URL.IMAGE_URL;
 
 
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHolder> {
 
     private Context context;
     private TrailersListDao trailersListDao;
-    private Service service;
+    private Gliding gliding;
     private final OnItemClickListener listener;
 
-    public TrailersAdapter(Context context, TrailersListDao trailersListDao, OnItemClickListener listener, Service service) {
+    public TrailersAdapter(Context context, TrailersListDao trailersListDao, Gliding gliding, OnItemClickListener listener) {
         this.context = context;
         this.trailersListDao = trailersListDao;
+        this.gliding = gliding;
         this.listener = listener;
-        this.service = service;
     }
 
     @Override
@@ -50,21 +39,17 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        Glide.with(context).load("http://i.ytimg.com/vi/"+trailersListDao.getResults().get(position).getKey()+"/mqdefault.jpg").asBitmap().into(new SimpleTarget<Bitmap>(400, 400) {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                Drawable drawable = new BitmapDrawable(resource);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    holder.listTrailersImageView.setBackground(drawable);
-                }
-            }
-        });
+        gliding.GlideBackdrop(context,
+                "http://i.ytimg.com/vi/"+trailersListDao.getResults().get(position).getKey()+"/mqdefault.jpg",
+                holder.listTrailersImageView);
+
+
 
         holder.click(trailersListDao.getResults().get(position), listener);
     }
 
     public interface OnItemClickListener {
-        void onClick(TrailersListDao Item);
+        void onClick(TrailersApiDao Item);
     }
 
     @Override
@@ -86,7 +71,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onClick(trailersListDao);
+                    listener.onClick(trailersApiDao);
                 }
             });
         }

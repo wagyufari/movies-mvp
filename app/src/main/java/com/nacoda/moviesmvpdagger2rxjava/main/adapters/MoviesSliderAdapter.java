@@ -22,24 +22,27 @@ import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.main.DetailActivity;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
-import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Parcefy;
+import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
-import java.util.Arrays;
-
-import static com.nacoda.moviesmvpdagger2rxjava.URL.IMAGE_URL;
+import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
 
 public class MoviesSliderAdapter extends PagerAdapter {
 
     private MoviesListDao moviesListDao;
     private LayoutInflater inflater;
     private Activity activity;
-    private Service service;
+    private Parcefy parcefy;
+    private Utils utils;
+    Gliding gliding;
 
-    public MoviesSliderAdapter(Activity activity, MoviesListDao moviesListDao, Service service) {
+    public MoviesSliderAdapter(Activity activity, MoviesListDao moviesListDao, Parcefy parcefy, Utils utils, Gliding gliding) {
         this.activity = activity;
         this.moviesListDao = moviesListDao;
         inflater = LayoutInflater.from(activity);
-        this.service = service;
+        this.parcefy = parcefy;
+        this.utils = utils;
     }
 
     @Override
@@ -58,13 +61,9 @@ public class MoviesSliderAdapter extends PagerAdapter {
 
         final ImageView moviesMainBackdropImageView = (ImageView) mView.findViewById(R.id.movies_main_backdrop_image_view);
         ImageView moviesMainPosterImageView = (ImageView) mView.findViewById(R.id.movies_main_poster_image_view);
-
         TextView moviesMainTitleTextView = (TextView) mView.findViewById(R.id.movies_main_title_text_view);
-
         TextView moviesMainGenreTextView = (TextView) mView.findViewById(R.id.movies_main_genre_text_view);
-
         TextView moviesReleaseDateTextView = (TextView) mView.findViewById(R.id.movies_main_release_date_text_view);
-
         RatingBar moviesMainVoteAverageRatingBar = (RatingBar) mView.findViewById(R.id.movies_main_vote_average_rating_bar);
 
 
@@ -84,16 +83,16 @@ public class MoviesSliderAdapter extends PagerAdapter {
                 .into(moviesMainPosterImageView);
 
         moviesMainTitleTextView.setText(moviesListDao.getResults().get(position).getTitle());
-        moviesMainGenreTextView.setText(service.getGenres(moviesListDao.getResults().get(position).getGenre_ids()));
+        moviesMainGenreTextView.setText(utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids()));
         moviesReleaseDateTextView.setText(moviesListDao.getResults().get(position).getRelease_date());
         moviesMainVoteAverageRatingBar.setRating(moviesListDao.getResults().get(position).getVote_average() / 2);
 
         moviesMainBackdropImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String genres = service.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
+                String genres = utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
 
-                ParcelableMovies movies = service.fillParcelableList(moviesListDao,genres,position);
+                ParcelableMovies movies = parcefy.fillParcelableList(moviesListDao, genres, position);
 
                 Intent detail = new Intent(activity, DetailActivity.class);
                 detail.putExtra("parcelableMovies", movies);
