@@ -13,20 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".main.MainMoviesActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".main.DetailActivity"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".main.MoviesActivity"></activity>
+        <activity android:name=".main.MoviesActivity" />
         <activity android:name=".main.MoviesPageActivity" />
         <activity
             android:name=".main.YoutubeActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".main.FavoritesActivity">
 
         </activity>
     </application>

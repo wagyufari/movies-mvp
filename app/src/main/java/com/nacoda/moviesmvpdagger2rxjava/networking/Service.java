@@ -116,6 +116,39 @@ public class Service {
 
     }
 
+    public Subscription getNowPlayingList(final GetNowPlayingCallback callback, int page) {
+
+        return networkService.getNowPlaying(
+                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                "en-US",
+                String.valueOf(page)
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends MoviesListDao>>() {
+                    @Override
+                    public Observable<? extends MoviesListDao> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<MoviesListDao>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+                    }
+
+                    @Override
+                    public void onNext(MoviesListDao moviesListDao) {
+                        callback.onSuccess(moviesListDao);
+                    }
+                });
+    }
+
     public Subscription getMoviesDetail(final GetMoviesDetailCallback callback, String movieId) {
 
         return networkService.getMoviesDetail(
@@ -243,6 +276,12 @@ public class Service {
     }
 
     public interface GetTopRatedCallback {
+        void onSuccess(MoviesListDao moviesListDao);
+
+        void onError(NetworkError networkError);
+    }
+
+    public interface GetNowPlayingCallback {
         void onSuccess(MoviesListDao moviesListDao);
 
         void onError(NetworkError networkError);

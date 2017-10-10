@@ -40,9 +40,8 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         gliding.GlideBackdrop(context,
-                "http://i.ytimg.com/vi/"+trailersListDao.getResults().get(position).getKey()+"/mqdefault.jpg",
+                "http://i.ytimg.com/vi/" + trailersListDao.getResults().get(position).getKey() + "/mqdefault.jpg",
                 holder.listTrailersImageView);
-
 
 
         holder.click(trailersListDao.getResults().get(position), listener);

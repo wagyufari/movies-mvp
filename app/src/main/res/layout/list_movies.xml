@@ -9,7 +9,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen_8dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/charcoal"
             app:cardUseCompatPadding="true">
 
             <RelativeLayout
@@ -35,7 +35,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="@color/dove_black"
+                        android:textColor="@color/white"
                         android:textSize="18sp" />
 
                     <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
@@ -45,7 +45,7 @@
                         android:layout_below="@id/list_movies_title_text_view"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textColor="@color/dove_black"
+                        android:textColor="@color/white"
                         android:textSize="12sp" />
                 </RelativeLayout>
             </RelativeLayout>

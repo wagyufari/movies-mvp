@@ -8,6 +8,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
 import com.nacoda.moviesmvpdagger2rxjava.R;
@@ -52,6 +54,10 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
     RecyclerView rvPopular;
     @InjectView(R.id.activity_movies_main_rv_toprated)
     RecyclerView rvToprated;
+    @InjectView(R.id.activity_movies_main_rv_nowplaying)
+    RecyclerView rvNowPlaying;
+    @InjectView(R.id.activity_movies_main_content_linear_layout)
+    LinearLayout activityMoviesMainContentLinearLayout;
     @InjectView(R.id.activity_movies_main_swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayoutMoviesMain;
     @InjectView(R.id.activity_movies_main_header_slider_view_pager)
@@ -76,12 +82,14 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
 
         presenter.getPopularList(1);
         presenter.getTopRatedList(1);
+        presenter.getNowPlayingList(1);
 
         swipeRefreshLayoutMoviesMain.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 presenter.getPopularList(1);
                 presenter.getTopRatedList(1);
+                presenter.getNowPlayingList(1);
             }
         });
     }
@@ -116,10 +124,13 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
     public void init() {
         LinearLayoutManager popularManager = new LinearLayoutManager(this);
         LinearLayoutManager topRatedManager = new LinearLayoutManager(this);
+        LinearLayoutManager nowPlayingManager = new LinearLayoutManager(this);
         popularManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         topRatedManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        nowPlayingManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         rvPopular.setLayoutManager(popularManager);
         rvToprated.setLayoutManager(topRatedManager);
+        rvNowPlaying.setLayoutManager(nowPlayingManager);
     }
 
     @Override
@@ -147,6 +158,12 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
     @Override
     public void getTopRatedListSuccess(MoviesListDao moviesListDao) {
         initMoviesResponse(moviesListDao, rvToprated);
+    }
+
+    @Override
+    public void getNowPlayingListSuccess(MoviesListDao moviesListDao) {
+        initMoviesResponse(moviesListDao, rvNowPlaying);
+        activityMoviesMainContentLinearLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -183,7 +200,7 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
         rv_movies.setAdapter(adapter);
     }
 
-    @OnClick({R.id.activity_movies_main_popular_see_all_text_view, R.id.activity_movies_main_top_rated_see_all_text_view})
+    @OnClick({R.id.activity_movies_main_popular_see_all_text_view, R.id.activity_movies_main_top_rated_see_all_text_view,R.id.activity_movies_main_now_playing_see_all_text_view})
     public void onClick(View view) {
         Intent movies = new Intent(MainMoviesActivity.this, MoviesActivity.class);
         switch (view.getId()) {
@@ -199,6 +216,22 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
                 movies.putExtra("page", 1);
                 startActivity(movies);
                 break;
+            case R.id.activity_movies_main_now_playing_see_all_text_view:
+                movies.putExtra("total_pages", total_pages);
+                movies.putExtra("category", "now_playing");
+                movies.putExtra("page", 1);
+                startActivity(movies);
+                break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(MainMoviesActivity.this, FavoritesActivity.class));
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

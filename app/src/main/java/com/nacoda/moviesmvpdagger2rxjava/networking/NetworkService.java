@@ -31,6 +31,13 @@ public interface NetworkService {
             @Query("page") String page
     );
 
+    @GET("now_playing")
+    Observable<MoviesListDao> getNowPlaying(
+            @Query("api_key") String api_key,
+            @Query("language") String language,
+            @Query("page") String page
+    );
+
     @GET("{movieId}")
     Observable<DetailApiDao> getMoviesDetail(
             @Path("movieId") String movieId,

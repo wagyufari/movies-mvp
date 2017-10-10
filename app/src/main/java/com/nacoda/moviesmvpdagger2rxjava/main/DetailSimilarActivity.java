@@ -125,6 +125,11 @@ public class DetailSimilarActivity extends BaseApp implements MoviesView {
 
     }
 
+    @Override
+    public void getNowPlayingListSuccess(MoviesListDao moviesListDao) {
+
+    }
+
     private void initDialog() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.loading_dialog);
@@ -204,5 +209,10 @@ public class DetailSimilarActivity extends BaseApp implements MoviesView {
 
         dialog.dismiss();
         activityDetailContentRelativeLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

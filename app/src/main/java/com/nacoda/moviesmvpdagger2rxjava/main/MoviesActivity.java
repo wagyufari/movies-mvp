@@ -111,6 +111,15 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                         presenter.getTopRatedList(page);
                     }
                 });
+                break;
+            case "now_playing":
+                presenter.getNowPlayingList(page);
+                swipeRefreshLayoutMovies.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        presenter.getNowPlayingList(page);
+                    }
+                });
         }
     }
 
@@ -154,6 +163,15 @@ public class MoviesActivity extends BaseApp implements MoviesView {
 
     @Override
     public void getTopRatedListSuccess(MoviesListDao moviesListDao) {
+        if (page == Integer.parseInt(moviesListDao.getTotal_pages())) {
+            activityMoviesArrowRight.setVisibility(View.GONE);
+        }
+
+        initMoviesResponse(moviesListDao, rvMovies);
+    }
+
+    @Override
+    public void getNowPlayingListSuccess(MoviesListDao moviesListDao) {
         if (page == Integer.parseInt(moviesListDao.getTotal_pages())) {
             activityMoviesArrowRight.setVisibility(View.GONE);
         }
@@ -260,5 +278,10 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                 });
                 break;
         }
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

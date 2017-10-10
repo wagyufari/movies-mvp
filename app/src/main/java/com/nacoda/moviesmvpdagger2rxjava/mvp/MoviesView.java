@@ -21,6 +21,8 @@ public interface MoviesView {
 
     void getTopRatedListSuccess(MoviesListDao moviesListDao);
 
+    void getNowPlayingListSuccess(MoviesListDao moviesListDao);
+
     void getMoviesDetailSuccess(DetailApiDao detailApiDao);
 
     void getTrailersSuccess(TrailersListDao trailersListDao);

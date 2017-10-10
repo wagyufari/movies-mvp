@@ -1,18 +1,26 @@
 package com.nacoda.moviesmvpdagger2rxjava.main;
 
 import android.app.Dialog;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.databinding.ActivityDetailBinding;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.MoviesSimilarAdapter;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.TrailersAdapter;
+import com.nacoda.moviesmvpdagger2rxjava.main.db.AddFavoritesViewModel;
+import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesListViewModel;
+import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesModel;
 import com.nacoda.moviesmvpdagger2rxjava.models.Detail;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.Movies;
@@ -30,31 +38,54 @@ import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Parcefy;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class DetailActivity extends BaseApp implements MoviesView {
 
-    @Inject Service service;
-    @Inject Gliding gliding;
-    @Inject Parcefy parcefy;
-    @Inject Utils utils;
-    @Inject Detail detail;
-    @Inject Movies movies;
-    @Inject Settings settings;
+    @Inject
+    Service service;
+    @Inject
+    Gliding gliding;
+    @Inject
+    Parcefy parcefy;
+    @Inject
+    Utils utils;
+    @Inject
+    Detail detail;
+    @Inject
+    Movies movies;
+    @Inject
+    Settings settings;
 
     ParcelableMovies parcelableMovies;
     Dialog dialog;
+    ActivityDetailBinding binding;
 
-    @InjectView(R.id.activity_detail_content_relative_layout)
-    RelativeLayout activityDetailContentRelativeLayout;
     @InjectView(R.id.activity_detail_rv_trailers)
     RecyclerView activityDetailRvTrailers;
+    @InjectView(R.id.activity_detail_trailers_linear_layout)
+    LinearLayout activityDetailTrailersLinearLayout;
     @InjectView(R.id.activity_detail_rv_similar)
     RecyclerView activityDetailRvSimilar;
-    ActivityDetailBinding binding;
+    @InjectView(R.id.activity_detail_similar_linear_layout)
+    LinearLayout activityDetailSimilarLinearLayout;
+    @InjectView(R.id.activity_detail_content_relative_layout)
+    RelativeLayout activityDetailContentRelativeLayout;
+
+    @InjectView(R.id.activity_detail_favorite_view)
+    View activityDetailFavoriteView;
+    @InjectView(R.id.activity_detail_unfavorite_view)
+    View activityDetailUnfavoriteView;
+
+    FavoritesListViewModel viewModel;
+    AddFavoritesViewModel addViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +96,50 @@ public class DetailActivity extends BaseApp implements MoviesView {
         initDialog();
         getParcelable();
         initRetrofit();
+
+        viewModel = ViewModelProviders.of(this).get(FavoritesListViewModel.class);
+        addViewModel = ViewModelProviders.of(this).get(AddFavoritesViewModel.class);
+
+        viewModel.getFavoritesList().observe(DetailActivity.this, new Observer<List<FavoritesModel>>() {
+            @Override
+            public void onChanged(@Nullable List<FavoritesModel> favorites) {
+                assert favorites != null;
+                for (int i = 0; i < favorites.size(); i++){
+                    if (favorites.get(i).getPoster_path().equals(parcelableMovies.getPoster_path())){
+                        final FavoritesModel favoritesModel = (FavoritesModel)favorites.get(i);
+                        activityDetailFavoriteView.setVisibility(View.GONE);
+                        activityDetailUnfavoriteView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                viewModel.deleteFavorites(favoritesModel);
+                                activityDetailUnfavoriteView.setVisibility(View.GONE);
+                                activityDetailFavoriteView.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+
+        activityDetailFavoriteView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addViewModel.addFavorites(new FavoritesModel(
+                        parcelableMovies.getPoster_path(),
+                        parcelableMovies.getBackdrop_path(),
+                        parcelableMovies.getTitle(),
+                        parcelableMovies.getGenres(),
+                        parcelableMovies.getId(),
+                        parcelableMovies.getOverview(),
+                        parcelableMovies.getRelease_date(),
+                        parcelableMovies.getVote_average(),
+                        parcelableMovies.getVote_count()
+                ));
+                activityDetailFavoriteView.setVisibility(View.GONE);
+                activityDetailUnfavoriteView.setVisibility(View.VISIBLE);
+            }
+        });
+
     }
 
     public void initRetrofit() {
@@ -111,6 +186,11 @@ public class DetailActivity extends BaseApp implements MoviesView {
 
     }
 
+    @Override
+    public void getNowPlayingListSuccess(MoviesListDao moviesListDao) {
+
+    }
+
     private void initDialog() {
         dialog = new Dialog(this);
         dialog.setContentView(R.layout.loading_dialog);
@@ -131,6 +211,9 @@ public class DetailActivity extends BaseApp implements MoviesView {
     @Override
     public void getTrailersSuccess(final TrailersListDao trailersListDao) {
 
+        if (trailersListDao.getResults().size() == 0) {
+            activityDetailTrailersLinearLayout.setVisibility(View.GONE);
+        }
         activityDetailContentRelativeLayout.setVisibility(View.GONE);
         dialog.show();
 
@@ -152,10 +235,14 @@ public class DetailActivity extends BaseApp implements MoviesView {
     @Override
     public void getSimilarSuccess(SimilarListDao similarListDao) {
 
+        if (similarListDao.getResults().size() == 0) {
+            activityDetailSimilarLinearLayout.setVisibility(View.GONE);
+        }
+
         activityDetailContentRelativeLayout.setVisibility(View.GONE);
         dialog.show();
 
-        MoviesSimilarAdapter adapter = new MoviesSimilarAdapter(getApplicationContext(), similarListDao, utils,gliding,
+        MoviesSimilarAdapter adapter = new MoviesSimilarAdapter(getApplicationContext(), similarListDao, utils, gliding,
                 new MoviesSimilarAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(SimilarApiDao item) {
@@ -172,5 +259,10 @@ public class DetailActivity extends BaseApp implements MoviesView {
         utils.initRecyclerView(DetailActivity.this, activityDetailRvSimilar, adapter);
         dialog.dismiss();
         activityDetailContentRelativeLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

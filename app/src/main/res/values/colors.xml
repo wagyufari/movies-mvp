@@ -15,6 +15,7 @@
     <color name="taupe">#483C32</color>
     <color name="davys_gray">#555555</color>
     <color name="charcoal">#36454F</color>
+    <color name="light_charcoal">#475c69</color>
     <color name="outer_space">#414A4C</color>
     <color name="black_olive">#3B3C36</color>
     <color name="onyx">#353839</color>
@@ -22,6 +23,8 @@
     <color name="leather_jacket_black">#253529</color>
     <color name="raisin_black">#242124</color>
     <color name="light_black">#1A1110</color>
+    <color name="teal_blue">#367588</color>
+    <color name="independence">#4C516D</color>
 
 
 

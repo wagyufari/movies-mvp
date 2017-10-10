@@ -67,6 +67,27 @@ public class MoviesPresenter {
         subscriptions.add(subscription);
     }
 
+    public void getNowPlayingList(int page) {
+
+        view.showWait();
+        Subscription subscription = service.getNowPlayingList(new Service.GetNowPlayingCallback() {
+            @Override
+            public void onSuccess(MoviesListDao moviesListDao) {
+                view.removeWait();
+                view.getNowPlayingListSuccess(moviesListDao);
+            }
+
+            @Override
+            public void onError(NetworkError networkError) {
+                view.removeWait();
+                view.onFailure(networkError.getAppErrorMessage());
+            }
+
+        }, page);
+
+        subscriptions.add(subscription);
+    }
+
     public void getMoviesDetail(String movieId) {
 
         view.showWait();
