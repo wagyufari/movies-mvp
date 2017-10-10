@@ -217,7 +217,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
 
     @OnClick({R.id.activity_movies_arrow_left, R.id.activity_movies_arrow_right, R.id.activity_movies_pages_relative_layout})
     public void onClick(View view) {
-        Intent movies = new Intent(MoviesActivity.this, MoviesPageActivity.class);
+        Intent movies = new Intent(MoviesActivity.this, MoviesActivity.class);
         switch (view.getId()) {
             case R.id.activity_movies_arrow_left:
                 movies.putExtra("category", category);
@@ -259,7 +259,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                                         } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) <= 0){
                                             Toast.makeText(MoviesActivity.this, "Can't be less than 1", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Intent movies = new Intent(MoviesActivity.this, MoviesPageActivity.class);
+                                            Intent movies = new Intent(MoviesActivity.this, MoviesActivity.class);
                                             movies.putExtra("category", category);
                                             movies.putExtra("page", Integer.parseInt(pagesDialogJumpEditText.getText().toString()));
                                             movies.putExtra("total_pages", total_pages);
