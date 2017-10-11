@@ -23,4 +23,8 @@ You must provide your own API key in order to build the app.
 
 ## Screenshoots
 
-![screen](../master/screen/list-movies.png)
+![screen](../master/screen/moviesmain.png)
+![screen](../master/screen/discover.png)
+![screen](../master/screen/detailheader.png)
+![screen](../master/screen/detailfooter.png)
+![screen](../master/screen/favorites.png)
