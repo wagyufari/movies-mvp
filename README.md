@@ -19,7 +19,12 @@ You must provide your own API key in order to build the app.
 * [Retrofit](https://github.com/square/retrofit)
 * [Glide](https://github.com/bumptech/glide)
 * [RxJava](https://github.com/ReactiveX/RxJava)
-* [RxAndroid](https://github.com/ReactiveX/RxAndroid.git)
+* [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+* [Android Architecture Components](https://github.com/googlesamples/android-architecture-components)
+* [Flubber](https://github.com/veltman/flubber)
+* [Gson](https://github.com/google/gson)
+* [Youtube Player API for Android](https://developers.google.com/youtube/android/player/)
+
 
 ## Screenshoots
 
