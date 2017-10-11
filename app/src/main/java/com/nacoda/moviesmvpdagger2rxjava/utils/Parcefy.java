@@ -1,5 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.utils;
 
+import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesModel;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
@@ -34,6 +35,21 @@ public class Parcefy {
                 item.getId(),
                 item.getOverview(),
                 genres,
+                item.getVote_average(),
+                item.getVote_count()
+        );
+        return parcelableMovies;
+    }
+
+    public ParcelableMovies fillFavoritesParcelable(FavoritesModel item) {
+        ParcelableMovies parcelableMovies = new ParcelableMovies(
+                item.getPoster_path(),
+                item.getBackdrop_path(),
+                item.getTitle(),
+                item.getRelease_date(),
+                item.getMovieId(),
+                item.getOverview(),
+                item.getGenres(),
                 item.getVote_average(),
                 item.getVote_count()
         );

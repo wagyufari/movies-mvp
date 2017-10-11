@@ -24,6 +24,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private Context context;
     private MoviesListDao moviesListDao;
+    private Utils utils;
+    private Gliding gliding;
+    private final OnItemClickListener listener;
 
     public MoviesAdapter(Context context, MoviesListDao moviesListDao, Utils utils, Gliding gliding, OnItemClickListener listener) {
         this.context = context;
@@ -32,11 +35,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         this.gliding = gliding;
         this.listener = listener;
     }
-
-    private Utils utils;
-    private Gliding gliding;
-
-    private final OnItemClickListener listener;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

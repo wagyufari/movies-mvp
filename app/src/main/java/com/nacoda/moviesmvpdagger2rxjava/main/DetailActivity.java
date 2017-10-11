@@ -104,9 +104,9 @@ public class DetailActivity extends BaseApp implements MoviesView {
             @Override
             public void onChanged(@Nullable List<FavoritesModel> favorites) {
                 assert favorites != null;
-                for (int i = 0; i < favorites.size(); i++){
-                    if (favorites.get(i).getPoster_path().equals(parcelableMovies.getPoster_path())){
-                        final FavoritesModel favoritesModel = (FavoritesModel)favorites.get(i);
+                for (int i = 0; i < favorites.size(); i++) {
+                    if (favorites.get(i).getPoster_path().equals(parcelableMovies.getPoster_path())) {
+                        final FavoritesModel favoritesModel = (FavoritesModel) favorites.get(i);
                         activityDetailFavoriteView.setVisibility(View.GONE);
                         activityDetailUnfavoriteView.setOnClickListener(new View.OnClickListener() {
                             @Override

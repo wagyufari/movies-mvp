@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.nacoda.moviesmvpdagger2rxjava.Config;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesModel;
+import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 
 import java.util.List;
@@ -26,11 +28,13 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
     private List<FavoritesModel> favoritesModelList;
     private View.OnLongClickListener longClickListener;
+    private final OnItemClickListener listener;
     private Context context;
 
-    public FavoritesAdapter(List<FavoritesModel> favoritesModelList, View.OnLongClickListener longClickListener, Context context) {
+    public FavoritesAdapter(List<FavoritesModel> favoritesModelList, View.OnLongClickListener longClickListener, OnItemClickListener listener, Context context) {
         this.favoritesModelList = favoritesModelList;
         this.longClickListener = longClickListener;
+        this.listener = listener;
         this.context = context;
     }
 
@@ -40,12 +44,17 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 .inflate(R.layout.list_favorites, parent, false));
     }
 
+    public interface OnItemClickListener {
+        void onClick(FavoritesModel item);
+    }
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         FavoritesModel favoritesModel = favoritesModelList.get(position);
 
         holder.listFavoritesTitleTextView.setText(favoritesModel.getTitle());
         holder.listFavoritesGenresTextView.setText(favoritesModel.getGenres());
+        holder.listFavoritesReleaseDateTextView.setText(favoritesModel.getRelease_date());
 
         Glide.with(context).load(Config.IMAGE_URL + favoritesModel.getPoster_path())
                 .crossFade()
@@ -54,6 +63,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         holder.itemView.setTag(favoritesModel);
         holder.itemView.setOnLongClickListener(longClickListener);
+        holder.click(favoritesModel, listener);
     }
 
     @Override
@@ -72,12 +82,23 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         TextView listFavoritesTitleTextView;
         @InjectView(R.id.list_favorites_genres_text_view)
         TextView listFavoritesGenresTextView;
+        @InjectView(R.id.list_favorites_release_date_text_view)
+        TextView listFavoritesReleaseDateTextView;
         @InjectView(R.id.list_favorites_poster_image_view)
         ImageView listFavoritesPosterImageView;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+        }
+
+        public void click(final FavoritesModel item, final OnItemClickListener listener) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onClick(item);
+                }
+            });
         }
     }
 }

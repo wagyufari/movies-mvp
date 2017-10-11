@@ -209,7 +209,6 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                         startActivity(detail);
                         overridePendingTransition(R.anim.slide_up, R.anim.no_change);
 
-
                     }
                 });
         rv_movies.setAdapter(adapter);
