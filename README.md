@@ -5,7 +5,12 @@ This functions app the same as any other popular movies app.
 ## Features
 
 With the app, you can:
-* Discover the most popular movies from [The Movie Database](https://www.themoviedb.org/documentation/api)
+* Discover the most popular movies on [The Movie Database](https://www.themoviedb.org/documentation/api)
+* Discover top rated movies on [The Movie Database](https://www.themoviedb.org/documentation/api)
+* Discover the now playing movies on [The Movie Database](https://www.themoviedb.org/documentation/api)
+* Discover similar movies
+* Watch movie trailer inside the app
+* Add movies to favorites (Local)
 
 ## The Movie Database
 
