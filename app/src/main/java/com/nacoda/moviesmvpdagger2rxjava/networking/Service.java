@@ -1,7 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.networking;
 
 import android.content.Context;
-import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;

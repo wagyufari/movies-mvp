@@ -1,11 +1,7 @@
 package com.nacoda.moviesmvpdagger2rxjava.models;
 
-import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 
 /**
  * Created by ASUS on 25/09/2017.
@@ -48,15 +44,15 @@ public class ParcelableMovies implements Parcelable {
         return genres;
     }
 
-    public float getVote_average() {
-        return vote_average;
+    public float getScore() {
+        return score;
     }
 
     public float getVote_count() {
         return vote_count;
     }
 
-    public ParcelableMovies(String poster_path, String backdrop_path, String title, String release_date, String id, String overview, String genres, float vote_average, float vote_count) {
+    public ParcelableMovies(String poster_path, String backdrop_path, String title, String release_date, String id, String overview, String genres, float score, float vote_count) {
 
         this.poster_path = poster_path;
         this.backdrop_path = backdrop_path;
@@ -65,12 +61,12 @@ public class ParcelableMovies implements Parcelable {
         this.id = id;
         this.overview = overview;
         this.genres = genres;
-        this.vote_average = vote_average;
+        this.score = score;
         this.vote_count = vote_count;
     }
 
     private String genres;
-    private float vote_average;
+    private float score;
     private float vote_count;
 
     @Override
@@ -87,7 +83,7 @@ public class ParcelableMovies implements Parcelable {
         dest.writeString(this.id);
         dest.writeString(this.overview);
         dest.writeString(this.genres);
-        dest.writeFloat(this.vote_average);
+        dest.writeFloat(this.score);
         dest.writeFloat(this.vote_count);
     }
 
@@ -99,7 +95,7 @@ public class ParcelableMovies implements Parcelable {
         this.id = in.readString();
         this.overview = in.readString();
         this.genres = in.readString();
-        this.vote_average = in.readFloat();
+        this.score = in.readFloat();
         this.vote_count = in.readFloat();
     }
 

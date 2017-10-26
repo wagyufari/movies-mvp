@@ -2,19 +2,15 @@ package com.nacoda.moviesmvpdagger2rxjava.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
+import com.nacoda.moviesmvpdagger2rxjava.BaseActivity;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.MoviesMainAdapter;
-import com.nacoda.moviesmvpdagger2rxjava.main.adapters.MoviesSliderAdapter;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
@@ -28,16 +24,13 @@ import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Parcefy;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class MainMoviesActivity extends BaseApp implements MoviesView {
+public class MainMoviesActivity extends BaseActivity implements MoviesView {
 
     @Inject
     public Service service;
@@ -48,20 +41,16 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
     @Inject
     Gliding gliding;
 
-    private static int currentPage = 0;
-
-    @InjectView(R.id.activity_movies_main_rv_popular)
+    @BindView(R.id.activity_movies_main_rv_popular)
     RecyclerView rvPopular;
-    @InjectView(R.id.activity_movies_main_rv_toprated)
+    @BindView(R.id.activity_movies_main_rv_toprated)
     RecyclerView rvToprated;
-    @InjectView(R.id.activity_movies_main_rv_nowplaying)
+    @BindView(R.id.activity_movies_main_rv_nowplaying)
     RecyclerView rvNowPlaying;
-    @InjectView(R.id.activity_movies_main_content_linear_layout)
+    @BindView(R.id.activity_movies_main_content_linear_layout)
     LinearLayout activityMoviesMainContentLinearLayout;
-    @InjectView(R.id.activity_movies_main_swipe_refresh_layout)
+    @BindView(R.id.activity_movies_main_swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayoutMoviesMain;
-    @InjectView(R.id.activity_movies_main_header_slider_view_pager)
-    ViewPager moviesMainHeaderSliderViewPager;
 
     String total_pages;
 
@@ -70,7 +59,7 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
         super.onCreate(savedInstanceState);
         getApplicationComponent().inject(this);
         renderView();
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         init();
         utils.initFadeinFlubber(swipeRefreshLayoutMoviesMain);
         initRetrofit();
@@ -92,29 +81,6 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
                 presenter.getNowPlayingList(1);
             }
         });
-    }
-
-    private void initSlider(final MoviesListDao moviesListDao) {
-
-        moviesMainHeaderSliderViewPager.setAdapter(new MoviesSliderAdapter(MainMoviesActivity.this, moviesListDao, parcefy, utils,gliding));
-
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == 6) {
-                    currentPage = 0;
-                }
-                moviesMainHeaderSliderViewPager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 4500, 4500);
     }
 
     public void renderView() {
@@ -152,7 +118,7 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
     public void getPopularListSuccess(MoviesListDao moviesListDao) {
         total_pages = moviesListDao.getTotal_pages();
         initMoviesResponse(moviesListDao, rvPopular);
-        initSlider(moviesListDao);
+//        initSlider(moviesListDao);
     }
 
     @Override
@@ -194,7 +160,6 @@ public class MainMoviesActivity extends BaseApp implements MoviesView {
                         detail.putExtra("parcelableMovies", movies);
                         detail.putExtra("id", item.getId());
                         startActivity(detail);
-                        overridePendingTransition(R.anim.slide_up, R.anim.no_change);
                     }
                 });
         rv_movies.setAdapter(adapter);

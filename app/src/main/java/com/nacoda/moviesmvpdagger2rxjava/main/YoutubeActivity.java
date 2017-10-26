@@ -8,15 +8,15 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.nacoda.moviesmvpdagger2rxjava.Config;
+import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    @InjectView(R.id.youtube_view)
+    @BindView(R.id.youtube_view)
     YouTubePlayerView player;
     private static final int RECOVERY_REQUEST = 1;
 
@@ -24,9 +24,9 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
-        player.initialize(Config.YOUTUBE_API_KEY, this);
+        player.initialize(Constants.YOUTUBE_API_KEY, this);
 
     }
 
@@ -55,7 +55,7 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECOVERY_REQUEST) {
             // Retry initialization if user performed a recovery action
-            getYouTubePlayerProvider().initialize(Config.YOUTUBE_API_KEY, this);
+            getYouTubePlayerProvider().initialize(Constants.YOUTUBE_API_KEY, this);
         }
     }
 

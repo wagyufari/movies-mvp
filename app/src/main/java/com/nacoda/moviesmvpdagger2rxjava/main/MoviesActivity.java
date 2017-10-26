@@ -7,16 +7,17 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appolica.flubber.Flubber;
-import com.nacoda.moviesmvpdagger2rxjava.BaseApp;
+import com.nacoda.moviesmvpdagger2rxjava.BaseActivity;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.main.adapters.MoviesAdapter;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
@@ -35,11 +36,11 @@ import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class MoviesActivity extends BaseApp implements MoviesView {
+public class MoviesActivity extends BaseActivity implements MoviesView {
 
     @Inject
     public Service service;
@@ -53,15 +54,15 @@ public class MoviesActivity extends BaseApp implements MoviesView {
     Movies movies;
 
 
-    @InjectView(R.id.activity_movies_rv_movies)
+    @BindView(R.id.activity_movies_rv_movies)
     RecyclerView rvMovies;
-    @InjectView(R.id.activity_movies_swipe_refresh_layout_movies)
+    @BindView(R.id.activity_movies_swipe_refresh_layout_movies)
     SwipeRefreshLayout swipeRefreshLayoutMovies;
-    @InjectView(R.id.activity_movies_arrow_left)
+    @BindView(R.id.activity_movies_arrow_left)
     View activityMoviesArrowLeft;
-    @InjectView(R.id.activity_movies_arrow_right)
+    @BindView(R.id.activity_movies_arrow_right)
     View activityMoviesArrowRight;
-    @InjectView(R.id.activity_movies_pages_text_view)
+    @BindView(R.id.activity_movies_pages_text_view)
     TextView activityMoviesPagesTextView;
 
     int page;
@@ -73,7 +74,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
         super.onCreate(savedInstanceState);
         getApplicationComponent().inject(this);
         renderView();
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
 
         if (getIntent().getIntExtra("page", 0) == 0) {
             page = getIntent().getIntExtra("page", 0);
@@ -133,7 +134,7 @@ public class MoviesActivity extends BaseApp implements MoviesView {
 
     public void init() {
         utils.arrowHelper(page, activityMoviesArrowRight, activityMoviesArrowLeft);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvMovies.setLayoutManager(layoutManager);
     }
 
@@ -207,7 +208,6 @@ public class MoviesActivity extends BaseApp implements MoviesView {
                         detail.putExtra("parcelableMovies", movies);
                         detail.putExtra("id", item.getId());
                         startActivity(detail);
-                        overridePendingTransition(R.anim.slide_up, R.anim.no_change);
 
                     }
                 });

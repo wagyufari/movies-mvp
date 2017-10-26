@@ -20,12 +20,12 @@ import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 public class FavoritesActivity extends LifecycleActivity {
 
-    @InjectView(R.id.activity_favorites_recycler_view)
+    @BindView(R.id.activity_favorites_recycler_view)
     RecyclerView activityFavoritesRecyclerView;
     private FavoritesListViewModel viewModel;
     private FavoritesAdapter adapter;
@@ -34,7 +34,7 @@ public class FavoritesActivity extends LifecycleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-        ButterKnife.inject(this);
+        ButterKnife.bind(this);
         adapter = initAdapter();
         initRecyclerView();
 
@@ -78,7 +78,6 @@ public class FavoritesActivity extends LifecycleActivity {
                         detail.putExtra("parcelableMovies", movies);
                         detail.putExtra("id", item.getMovieId());
                         startActivity(detail);
-                        overridePendingTransition(R.anim.slide_up, R.anim.no_change);
                     }
                 },
 

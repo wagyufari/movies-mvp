@@ -15,10 +15,10 @@ import com.nacoda.moviesmvpdagger2rxjava.models.SimilarListDao;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
-import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
+import static com.nacoda.moviesmvpdagger2rxjava.Constants.IMAGE_URL;
 
 
 public class MoviesSimilarAdapter extends RecyclerView.Adapter<MoviesSimilarAdapter.ViewHolder> {
@@ -72,16 +72,16 @@ public class MoviesSimilarAdapter extends RecyclerView.Adapter<MoviesSimilarAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.list_movies_title_text_view)
+        @BindView(R.id.list_movies_title_text_view)
         TextView listMoviesTitleTextView;
-        @InjectView(R.id.list_movies_genres_text_view)
+        @BindView(R.id.list_movies_genres_text_view)
         TextView listMoviesGenresTextView;
-        @InjectView(R.id.list_movies_poster_image_view)
+        @BindView(R.id.list_movies_poster_image_view)
         ImageView listMoviesPosterImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
 
         }
 

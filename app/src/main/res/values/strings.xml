@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MoviesMvpDagger2RxJava</string>
+    <string name="app_name">MovieTime</string>
     <string name="top_rated">Top Rated</string>
     <string name="popular">Popular</string>
     <string name="see_all">See all</string>
@@ -11,4 +11,11 @@
     <string name="similar">Similar</string>
     <string name="now_playing">Now Playing</string>
     <string name="movie_string">Movie</string>
+    <string name="d_movie_name">Pirates of the Caribbean: Dead Men Tell No Tales</string>
+    <string name="score">Score</string>
+    <string name="movies_score">6.6</string>
+    <string name="year">2017</string>
+    <string name="favorite">Favorite</string>
+    <string name="play_trailer">Trailer</string>
+    <string name="unfavorite">Favorited</string>
 </resources>

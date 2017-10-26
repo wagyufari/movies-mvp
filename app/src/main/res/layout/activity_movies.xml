@@ -27,17 +27,19 @@
                 android:layout_height="match_parent"
                 android:id="@+id/activity_movies_pages_relative_layout">
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.Montez
+                <TextView
                     android:id="@+id/activity_movies_title_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/montez"
                     android:text="Discover"
                     android:textColor="@color/white"
                     android:textSize="50sp" />
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                <TextView
                     android:id="@+id/activity_movies_pages_text_view"
+                    android:fontFamily="@font/roboto_light"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_movies_title_text_view"
@@ -73,7 +75,6 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/activity_movies_swipe_refresh_layout_movies"
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

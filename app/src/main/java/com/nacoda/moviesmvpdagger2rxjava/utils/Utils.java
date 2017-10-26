@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 
 import com.appolica.flubber.Flubber;
 import com.nacoda.moviesmvpdagger2rxjava.R;
-import com.nacoda.moviesmvpdagger2rxjava.Config;
+import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.models.Detail;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.Movies;
@@ -24,40 +24,6 @@ import java.util.Arrays;
  */
 
 public class Utils {
-
-    public void bindDetails(Detail detail, DetailApiDao detailApiDao){
-        detail.setBackdrop_path(Config.IMAGE_URL + detailApiDao.getBackdrop_path());
-        detail.setBudget(detailApiDao.getBudget());
-        detail.setHomepage(detailApiDao.getHomepage());
-        detail.setRuntime(detailApiDao.getRuntime() + " Minutes");
-        detail.setTagline(detailApiDao.getTagline());
-
-    }
-
-    public void bindMoviesParcelable(Movies movies, ParcelableMovies parcelableMovies){
-        movies.setPoster_path(Config.IMAGE_URL + parcelableMovies.getPoster_path());
-        movies.setBackdrop_path(Config.IMAGE_URL + parcelableMovies.getBackdrop_path());
-        movies.setTitle(parcelableMovies.getTitle());
-        movies.setGenre_ids(parcelableMovies.getGenres());
-        movies.setId(parcelableMovies.getId());
-        movies.setOverview(parcelableMovies.getOverview());
-        movies.setRelease_date(parcelableMovies.getRelease_date());
-        movies.setVote_average(parcelableMovies.getVote_average() / 2);
-        movies.setVote_count(parcelableMovies.getVote_count());
-    }
-
-    public void bindMovies(Movies movies, MoviesListDao moviesListDao, int position){
-        String genres = getGenres(moviesListDao.getResults().get(position).getGenre_ids());
-        movies.setPoster_path(Config.IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path());
-        movies.setBackdrop_path(Config.IMAGE_URL + moviesListDao.getResults().get(position).getBackdrop_path());
-        movies.setTitle(moviesListDao.getResults().get(position).getTitle());
-        movies.setGenre_ids(genres);
-        movies.setId(moviesListDao.getResults().get(position).getId());
-        movies.setOverview(moviesListDao.getResults().get(position).getOverview());
-        movies.setRelease_date(moviesListDao.getResults().get(position).getRelease_date());
-        movies.setVote_average(moviesListDao.getResults().get(position).getVote_average() / 2);
-        movies.setVote_count(moviesListDao.getResults().get(position).getVote_count());
-    }
 
     public String getGenres(String[] data) {
         String genres = Arrays.toString(data)
@@ -102,7 +68,7 @@ public class Utils {
         }
     }
 
-    public void setProgressbar(Dialog dialog){
+    public void setProgressbarDialog(Dialog dialog) {
         /** Set the progressbar color to white **/
         ProgressBar progressBar = dialog.findViewById(R.id.pbLoad);
         if (progressBar != null) {
@@ -113,7 +79,7 @@ public class Utils {
         /** Set the progressbar color to white **/
     }
 
-    public void initRecyclerView(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter){
+    public void initRecyclerView(Context context, RecyclerView recyclerView, RecyclerView.Adapter adapter) {
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setAdapter(adapter);

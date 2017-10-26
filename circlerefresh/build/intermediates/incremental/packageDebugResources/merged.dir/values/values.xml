@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#000</color>
+    <color name="black_olive">#3B3C36</color>
+    <color name="charcoal">#36454F</color>
+    <color name="colorAccent">#3f3f3f</color>
+    <color name="colorImagePlaceholder">#f2f2f2</color>
+    <color name="colorPrimary">#3f3f3f</color>
+    <color name="colorPrimaryDark">#2b2b2b</color>
+    <color name="darkGrey">#8c8c8c</color>
+    <color name="davys_gray">#555555</color>
+    <color name="dim_gray">#696969</color>
+    <color name="dove_black">#212225</color>
+    <color name="ebony">#555D50</color>
+    <color name="greyIndicator">#C0C0C0</color>
+    <color name="independence">#4C516D</color>
+    <color name="jet_black">#343434</color>
+    <color name="leather_jacket_black">#253529</color>
+    <color name="light_black">#1A1110</color>
+    <color name="light_charcoal">#475c69</color>
+    <color name="light_grey">#efefef</color>
+    <color name="onyx">#353839</color>
+    <color name="outer_space">#414A4C</color>
+    <color name="raisin_black">#242124</color>
+    <color name="taupe">#483C32</color>
+    <color name="teal_blue">#53adc9</color>
+    <color name="white">#fff</color>
+    <declare-styleable name="CirCleRefreshLayout"><attr format="color" name="AniBackColor"/><attr format="color" name="AniForeColor"/><attr format="integer" name="CircleSmaller"/></declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">CircleRefresh</string>
+    <string name="hello_world">Hello world!</string>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>

@@ -12,8 +12,8 @@ import com.nacoda.moviesmvpdagger2rxjava.models.TrailersApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.TrailersListDao;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHolder> {
@@ -57,12 +57,12 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.list_trailers_image_view)
+        @BindView(R.id.list_trailers_image_view)
         ImageView listTrailersImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
 
         }
 

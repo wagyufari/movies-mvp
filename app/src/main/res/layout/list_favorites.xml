@@ -25,36 +25,39 @@
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dimen_8dp"
                 android:layout_centerVertical="true"
+                android:layout_margin="@dimen/dimen_8dp"
                 android:layout_toEndOf="@id/list_favorites_poster_image_view">
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
+                <TextView
                     android:id="@+id/list_favorites_title_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
                     android:maxLines="1"
                     android:text="Test"
                     android:textColor="@color/white"
                     android:textSize="24sp" />
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoRegular
+                <TextView
                     android:id="@+id/list_favorites_genres_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/list_favorites_title_text_view"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto"
                     android:maxLines="1"
                     android:text="Test"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                <TextView
                     android:id="@+id/list_favorites_release_date_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/list_favorites_genres_text_view"
+                    android:fontFamily="@font/roboto_light"
                     android:text="Test"
                     android:textColor="@color/white"
                     android:textSize="14sp" />

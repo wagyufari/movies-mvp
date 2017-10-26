@@ -8,17 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Gliding;
 import com.nacoda.moviesmvpdagger2rxjava.utils.Utils;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 
-import static com.nacoda.moviesmvpdagger2rxjava.Config.IMAGE_URL;
+import static com.nacoda.moviesmvpdagger2rxjava.Constants.IMAGE_URL;
 
 
 public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.ViewHolder> {
@@ -49,13 +48,7 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
 
         String genres = utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
 
-        holder.listMoviesTitleTextView.setText(moviesListDao.getResults().get(position).getTitle());
-        holder.listMoviesGenresTextView.setText(genres);
-
-        Glide.with(context).load(IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path())
-                .crossFade()
-                .centerCrop()
-                .into(holder.listMoviesPosterImageView);
+        gliding.GlideBackdrop(context, IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path(), holder.listMoviesPosterImageView);
 
         holder.click(moviesListDao.getResults().get(position), listener);
 
@@ -71,16 +64,12 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.list_movies_title_text_view)
-        TextView listMoviesTitleTextView;
-        @InjectView(R.id.list_movies_genres_text_view)
-        TextView listMoviesGenresTextView;
-        @InjectView(R.id.list_movies_poster_image_view)
+        @BindView(R.id.list_movies_poster_image_view)
         ImageView listMoviesPosterImageView;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.inject(this, itemView);
+            ButterKnife.bind(this, itemView);
 
         }
 

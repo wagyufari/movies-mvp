@@ -30,8 +30,9 @@
                 android:layout_below="@id/list_movies_poster_image_view"
                 android:layout_margin="8dp">
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoBold
+                <TextView
                     android:id="@+id/list_movies_title_text_view"
+                    fontPath="fonts/roboto_bold.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -39,8 +40,9 @@
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
-                <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                <TextView
                     android:id="@+id/list_movies_genres_text_view"
+                    fontPath="fonts/roboto_light.ttf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/list_movies_title_text_view"

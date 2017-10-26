@@ -27,10 +27,14 @@
         <activity android:name=".main.MoviesActivity" />
         <activity
             android:name=".main.YoutubeActivity"
-            android:screenOrientation="landscape"/>
+            android:screenOrientation="landscape" />
         <activity android:name=".main.FavoritesActivity">
 
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/white"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
@@ -25,51 +25,50 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <!--android:visibility="gone"-->
 
 
-                    <RelativeLayout
-                        android:id="@+id/activity_movies_main_detail_linear_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        app:layout_behavior="@string/appbar_scrolling_view_behavior">z
+                    <!--<RelativeLayout-->
+                    <!--android:id="@+id/activity_movies_main_detail_linear_layout"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="250dp"-->
+                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">z-->
 
-                        <android.support.v4.view.ViewPager
-                            android:id="@+id/activity_movies_main_header_slider_view_pager"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            android:layout_alignParentTop="true" />
+                    <!--<android.support.v4.view.ViewPager-->
+                    <!--android:id="@+id/activity_movies_main_header_slider_view_pager"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_margin="@dimen/dimen_8dp"-->
+                    <!--android:layout_height="250dp"-->
+                    <!--android:layout_alignParentTop="true" />-->
 
-                    </RelativeLayout>
+                    <!--</RelativeLayout>-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/light_charcoal">
+                        android:layout_marginTop="@dimen/dimen_4dp">
 
-                        <View
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/raisin_black" />
 
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.MontserratThin
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_margin="@dimen/dimen_8dp"
+                            android:layout_marginStart="@dimen/dimen_8dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto"
                             android:text="@string/popular"
-                            android:textColor="@color/white"
-                            android:textSize="25sp" />
+                            android:textColor="@color/darkGrey"
+                            android:textSize="24sp" />
 
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                        <TextView
                             android:id="@+id/activity_movies_main_popular_see_all_text_view"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end|center_vertical"
-                            android:layout_margin="@dimen/dimen_16dp"
+                            android:layout_marginEnd="@dimen/dimen_16dp"
+                            android:background="@drawable/ripple"
+                            android:fontFamily="@font/roboto_light"
                             android:text="@string/see_all"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/white"
+                            android:textColorHighlight="@color/darkGrey"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -78,38 +77,35 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_popular"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_8dp" />
+                        android:layout_height="wrap_content" />
 
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/light_charcoal">
+                        android:layout_height="wrap_content">
 
-                        <View
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/raisin_black" />
-
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.MontserratThin
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_margin="@dimen/dimen_8dp"
+                            android:layout_marginStart="@dimen/dimen_8dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto"
                             android:text="@string/top_rated"
-                            android:textColor="@color/white"
-                            android:textSize="25sp" />
+                            android:textColor="@color/darkGrey"
+                            android:textSize="24sp" />
 
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                        <TextView
                             android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end|center_vertical"
-                            android:layout_margin="@dimen/dimen_16dp"
+                            android:layout_marginEnd="@dimen/dimen_16dp"
+                            android:background="@drawable/ripple"
+                            android:fontFamily="@font/roboto_light"
                             android:text="@string/see_all"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/white"
+                            android:textColor="@color/darkGrey"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -117,37 +113,34 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_toprated"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_8dp" />
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/light_charcoal">
+                        android:layout_height="wrap_content">
 
-                        <View
-                            android:layout_width="30dp"
-                            android:layout_height="match_parent"
-                            android:background="@color/raisin_black" />
-
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.MontserratThin
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_margin="@dimen/dimen_8dp"
+                            android:layout_marginStart="@dimen/dimen_8dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto"
                             android:text="@string/now_playing"
-                            android:textColor="@color/white"
-                            android:textSize="25sp" />
+                            android:textColor="@color/darkGrey"
+                            android:textSize="24sp" />
 
-                        <com.nacoda.moviesmvpdagger2rxjava.fonts.RobotoLight
+                        <TextView
                             android:id="@+id/activity_movies_main_now_playing_see_all_text_view"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="end|center_vertical"
-                            android:layout_margin="@dimen/dimen_16dp"
+                            android:layout_marginEnd="@dimen/dimen_16dp"
+                            android:background="@drawable/ripple"
+                            android:fontFamily="@font/roboto_light"
                             android:text="@string/see_all"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/white"
+                            android:textColor="@color/darkGrey"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -155,9 +148,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/activity_movies_main_rv_nowplaying"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/dimen_8dp" />
-
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
 
             </ScrollView>

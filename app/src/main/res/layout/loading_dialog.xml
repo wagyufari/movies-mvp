@@ -1,31 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/charcoal"
-        android:padding="14dp"
-        android:orientation="horizontal">
-
-        <ProgressBar
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/pbLoad"
-            android:layout_marginRight="8dp"/>
-
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/white"
-            android:text="Getting data..." />
-
-    </LinearLayout>
-
-</RelativeLayout>
+    android:id="@+id/pbLoad"
+    android:background="@android:color/transparent"
+    android:layout_width="100dp"
+    android:layout_height="100dp"/>

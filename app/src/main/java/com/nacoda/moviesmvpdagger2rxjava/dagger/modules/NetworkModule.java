@@ -1,5 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.dagger.modules;
 
+import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.networking.NetworkService;
 import com.nacoda.moviesmvpdagger2rxjava.networking.Service;
 
@@ -27,7 +28,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 @Module
 public class NetworkModule {
 
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
     public static final int CACHETIME = 432000;
 
     File cacheFile;
@@ -71,7 +71,7 @@ public class NetworkModule {
 
 
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addConverterFactory(ScalarsConverterFactory.create())
