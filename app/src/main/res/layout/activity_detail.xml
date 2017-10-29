@@ -15,7 +15,6 @@
         android:id="@+id/activity_detail_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.9"
         android:background="@color/dove_black"
         android:elevation="3dp"
         android:visibility="gone">
@@ -27,6 +26,8 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent" />
     </RelativeLayout>
+
+
 
     <include layout="@layout/content_detail" />
 

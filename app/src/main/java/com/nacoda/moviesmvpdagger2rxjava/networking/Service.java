@@ -14,6 +14,7 @@ import com.appolica.flubber.Flubber;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
@@ -48,7 +49,7 @@ public class Service {
     public Subscription getPopularList(final GetPopularCallback callback, int page) {
 
         return networkService.getPopular(
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                Constants.API_KEY,
                 "en-US",
                 String.valueOf(page)
         )
@@ -83,7 +84,7 @@ public class Service {
     public Subscription getTopRatedList(final GetTopRatedCallback callback, int page) {
 
         return networkService.getTopRated(
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                Constants.API_KEY,
                 "en-US",
                 String.valueOf(page)
         )
@@ -118,7 +119,7 @@ public class Service {
     public Subscription getNowPlayingList(final GetNowPlayingCallback callback, int page) {
 
         return networkService.getNowPlaying(
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                Constants.API_KEY,
                 "en-US",
                 String.valueOf(page)
         )
@@ -152,7 +153,7 @@ public class Service {
 
         return networkService.getMoviesDetail(
                 movieId,
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3",
+                Constants.API_KEY,
                 "en-US"
         )
                 .subscribeOn(Schedulers.io())
@@ -187,7 +188,7 @@ public class Service {
 
         return networkService.getTrailers(
                 movieId,
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3"
+                Constants.API_KEY
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -221,7 +222,7 @@ public class Service {
 
         return networkService.getSimilar(
                 movieId,
-                "d1fc10c2bd3bb72bd5ddf8f58a74a1a3"
+                Constants.API_KEY
         )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

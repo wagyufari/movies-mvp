@@ -15,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -25,6 +26,7 @@ import com.appolica.flubber.Flubber;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.daimajia.androidanimations.library.Techniques;
 import com.nacoda.moviesmvpdagger2rxjava.BaseActivity;
 import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.R;
@@ -48,6 +50,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class DetailActivity extends BaseActivity implements MoviesView {
 
@@ -97,6 +100,56 @@ public class DetailActivity extends BaseActivity implements MoviesView {
     // Movie Genres TextView
     @BindView(R.id.activity_detail_genres_text)
     TextView activityDetailGenresText;
+    // Movie Overview TextView
+    @BindView(R.id.activity_detail_overview_text_view)
+    TextView activityDetailOverviewTextView;
+    // Movies Poster Zoom
+    @BindView(R.id.activity_detail_poster_zoom_card)
+    CardView activityDetailPosterZoomCard;
+    // Movies Zoom Frame
+    @BindView(R.id.activity_detail_zoom_relative)
+    RelativeLayout activityDetailZoomFrame;
+    // Movies Overview Navigate Layout
+    @BindView(R.id.activity_detail_overview_navigate_layout)
+    RelativeLayout activityDetailOverviewNavigateLayout;
+    // Movies Credits Navigate Layout
+    @BindView(R.id.activity_detail_credits_navigate_layout)
+    RelativeLayout activityDetailCreditsNavigateLayout;
+    // Movies Overview Navigate Text
+    @BindView(R.id.activity_detail_overview_navigate_text)
+    TextView activityDetailOverviewNavigateText;
+    // Movies Credits Navigate Text
+    @BindView(R.id.activity_detail_credits_navigate_text)
+    TextView activityDetailCreditsNavigateText;
+    // Movies Overview Linear
+    @BindView(R.id.activity_detail_overview_linear)
+    LinearLayout activityDetailOverviewLinear;
+    // Movies Credits Linear
+    @BindView(R.id.activity_detail_credits_linear)
+    LinearLayout activityDetailCreditsLinear;
+
+
+    @OnClick(R.id.activity_detail_overview_navigate_layout)
+    public void OnOverviewClick() {
+        initOverview(activityDetailOverviewNavigateLayout,
+                activityDetailCreditsNavigateLayout,
+                activityDetailOverviewNavigateText,
+                activityDetailCreditsNavigateText,
+                activityDetailOverviewLinear,
+                activityDetailCreditsLinear
+        );
+    }
+
+    @OnClick(R.id.activity_detail_credits_navigate_layout)
+    public void OnCreditsClick() {
+        initCredits(activityDetailOverviewNavigateLayout,
+                activityDetailCreditsNavigateLayout,
+                activityDetailOverviewNavigateText,
+                activityDetailCreditsNavigateText,
+                activityDetailOverviewLinear,
+                activityDetailCreditsLinear
+        );
+    }
 
     ParcelableMovies parcelableMovies;
     FavoritesListViewModel viewModel;
@@ -126,14 +179,41 @@ public class DetailActivity extends BaseActivity implements MoviesView {
                 Constants.IMAGE_URL + parcelableMovies.getPoster_path(),
                 activityDetailPosterCard);
 
+        initPoster(this,
+                Constants.IMAGE_URL + parcelableMovies.getPoster_path(),
+                activityDetailPosterZoomCard);
+
         initMovieDescription(
                 activityDetailTitleTextView,
                 activityDetailYearTextView,
                 activityDetailScoreText,
-                activityDetailGenresText
+                activityDetailGenresText,
+                activityDetailOverviewTextView
         );
 
         initFavoritesFunction(activityDetailFavoriteCard, activityDetailUnfavoriteCard);
+    }
+
+    private void initOverview(View overviewLayout, View creditsLayout, TextView overviewText, TextView creditsText, View overviewLinear, View creditsLinear) {
+        overviewLayout.setBackgroundResource(R.drawable.rounded_accent_left);
+        utils.yoyo(overviewLayout, Techniques.FadeInRight,500);
+        creditsLayout.setBackgroundResource(0);
+        overviewText.setTextColor(getResources().getColor(R.color.white));
+        creditsText.setTextColor(getResources().getColor(R.color.colorAccent));
+        utils.revealWithChild(overviewLinear, 200, 100);
+        creditsLinear.setVisibility(View.GONE);
+
+    }
+
+    private void initCredits(View overviewLayout, View creditsLayout, TextView overviewText, TextView creditsText, View overviewLinear, View creditsLinear) {
+        creditsLayout.setBackgroundResource(R.drawable.rounded_accent_right);
+        utils.yoyo(creditsLayout, Techniques.FadeInLeft,500);
+        overviewLayout.setBackgroundResource(0);
+        creditsText.setTextColor(getResources().getColor(R.color.white));
+        overviewText.setTextColor(getResources().getColor(R.color.colorAccent));
+        utils.revealWithChild(creditsLinear, 200, 100);
+        overviewLinear.setVisibility(View.GONE);
+
     }
 
     /**
@@ -152,17 +232,19 @@ public class DetailActivity extends BaseActivity implements MoviesView {
     /**
      * This method is used to set the value of the given TextView according to the selected movie's data
      *
-     * @param titleTextView  The TextView used to show the title of the movie
-     * @param yearTextView   The TextView used to show the year of release of the movie (For this one, I used the substring(0,4)
-     *                       so that the TextView will only show the year of release, that is the first 4 characters of the data
-     * @param scoreTextView  The TextView used to show the score or the vote average of the movie
-     * @param genresTextView The TextView used to show the genre of the movie
-     */
-    private void initMovieDescription(TextView titleTextView, TextView yearTextView, TextView scoreTextView, TextView genresTextView) {
+     * @param titleTextView    The TextView used to show the title of the movie
+     * @param yearTextView     The TextView used to show the year of release of the movie (For this one, I used the substring(0,4)
+     *                         so that the TextView will only show the year of release, that is the first 4 characters of the data
+     * @param scoreTextView    The TextView used to show the score or the vote average of the movie
+     * @param genresTextView   The TextView used to show the genre of the movie
+     * @param overViewTextView The TextView used to show the synopsis or overview of the movie
+     **/
+    private void initMovieDescription(TextView titleTextView, TextView yearTextView, TextView scoreTextView, TextView genresTextView, TextView overViewTextView) {
         titleTextView.setText(parcelableMovies.getTitle());
         yearTextView.setText(parcelableMovies.getRelease_date().substring(0, 4));
         scoreTextView.setText(String.valueOf((parcelableMovies.getScore())));
         genresTextView.setText(parcelableMovies.getGenres());
+        overViewTextView.setText(parcelableMovies.getOverview());
     }
 
     /**
@@ -284,7 +366,6 @@ public class DetailActivity extends BaseActivity implements MoviesView {
                         Unfavorite_Card.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                Snackbar.make(activityDetailScrollView, "Removed from favorites!", Snackbar.LENGTH_SHORT).show();
                                 viewModel.deleteFavorites(favoritesModel);
                                 Unfavorite_Card.setVisibility(View.GONE);
                                 Favorite_Card.setVisibility(View.VISIBLE);
@@ -313,11 +394,9 @@ public class DetailActivity extends BaseActivity implements MoviesView {
 
     @Override
     public void removeWait() {
-        Flubber.with()
-                .animation(Flubber.AnimationPreset.FADE_OUT)
-                .duration(300)
-                .createFor(activityDetailLoadingLayout)
-                .start();
+        utils.flubber(activityDetailLoadingLayout, 300, Flubber.AnimationPreset.FADE_OUT);
+        utils.flubber(activityDetailScrollView, 1200, Flubber.AnimationPreset.FADE_IN_DOWN);
+        activityDetailScrollView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -389,7 +468,22 @@ public class DetailActivity extends BaseActivity implements MoviesView {
     }
 
     @Override
+    public void onBackPressed() {
+        if (activityDetailZoomFrame.getVisibility() == View.VISIBLE) {
+            utils.unreveal(activityDetailZoomFrame, 300);
+        } else {
+            finish();
+        }
+
+    }
+
+    @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    @OnClick(R.id.activity_detail_poster_card)
+    public void onClick() {
+        utils.revealWithChild(activityDetailZoomFrame, 300, 100);
     }
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="575dp"
+    android:elevation="@dimen/dimen_10dp">
+
+    <RelativeLayout
+        android:id="@+id/activity_detail_zoom_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:visibility="invisible">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/activity_detail_poster_zoom_card"
+            android:layout_width="250dp"
+            android:layout_height="375dp"
+            android:layout_centerInParent="true"
+            android:elevation="@dimen/dimen_2dp" />
+    </RelativeLayout>
+</io.codetail.widget.RevealFrameLayout>

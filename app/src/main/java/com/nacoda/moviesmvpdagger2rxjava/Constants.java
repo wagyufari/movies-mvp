@@ -19,6 +19,8 @@ public class Constants {
 
     public static final String YOUTUBE_API_KEY = "AIzaSyA1nfuspIPxbsrMQNm6RRTt-kfj2J6lsHk";
 
+    public static final String API_KEY = "d1fc10c2bd3bb72bd5ddf8f58a74a1a3";
+
     public static FavoritesModel FAVORITES_MODEL(ParcelableMovies parcelableMovies) {
         return new FavoritesModel(
                 parcelableMovies.getPoster_path(),

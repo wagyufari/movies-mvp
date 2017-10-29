@@ -6,13 +6,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -196,7 +195,7 @@ public class MoviesActivity extends BaseActivity implements MoviesView {
     }
 
     public void initMoviesResponse(MoviesListDao moviesListDao, RecyclerView rv_movies) {
-        MoviesAdapter adapter = new MoviesAdapter(getApplicationContext(), moviesListDao, utils,gliding,
+        MoviesAdapter adapter = new MoviesAdapter(getApplicationContext(), moviesListDao, utils, gliding,
                 new MoviesAdapter.OnItemClickListener() {
                     @Override
                     public void onClick(MoviesApiDao item) {
@@ -243,19 +242,17 @@ public class MoviesActivity extends BaseActivity implements MoviesView {
                     @Override
                     public boolean onKey(View view, int i, KeyEvent keyEvent) {
                         {
-                            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN)
-                            {
-                                switch (i)
-                                {
+                            if (keyEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                                switch (i) {
                                     case KeyEvent.KEYCODE_DPAD_CENTER:
                                     case KeyEvent.KEYCODE_ENTER:
 
 
-                                        if (pagesDialogJumpEditText.getText().toString().isEmpty()){
+                                        if (pagesDialogJumpEditText.getText().toString().isEmpty()) {
                                             Toast.makeText(MoviesActivity.this, "Field cannot be empty", Toast.LENGTH_SHORT).show();
-                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) > Integer.parseInt(total_pages)){
+                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) > Integer.parseInt(total_pages)) {
                                             Toast.makeText(MoviesActivity.this, "Max pages exceeded", Toast.LENGTH_SHORT).show();
-                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) <= 0){
+                                        } else if (Integer.parseInt(pagesDialogJumpEditText.getText().toString()) <= 0) {
                                             Toast.makeText(MoviesActivity.this, "Can't be less than 1", Toast.LENGTH_SHORT).show();
                                         } else {
                                             Intent movies = new Intent(MoviesActivity.this, MoviesActivity.class);

@@ -4,157 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:mContext=".MoviesActivity"
+    tools:showIn="@layout/activity_movies_main">
 
-    <LinearLayout
+    <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:id="@+id/activity_movies_main_tab_slider_view_pager"/>
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/activity_movies_main_swipe_refresh_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:id="@+id/activity_movies_main_content_linear_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <!--<RelativeLayout-->
-                    <!--android:id="@+id/activity_movies_main_detail_linear_layout"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="250dp"-->
-                    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">z-->
-
-                    <!--<android.support.v4.view.ViewPager-->
-                    <!--android:id="@+id/activity_movies_main_header_slider_view_pager"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_margin="@dimen/dimen_8dp"-->
-                    <!--android:layout_height="250dp"-->
-                    <!--android:layout_alignParentTop="true" />-->
-
-                    <!--</RelativeLayout>-->
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dimen_4dp">
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dimen_8dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/popular"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:id="@+id/activity_movies_main_popular_see_all_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="@dimen/dimen_16dp"
-                            android:background="@drawable/ripple"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="@string/see_all"
-                            android:textColorHighlight="@color/darkGrey"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/activity_movies_main_rv_popular"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dimen_8dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/top_rated"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:id="@+id/activity_movies_main_top_rated_see_all_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="@dimen/dimen_16dp"
-                            android:background="@drawable/ripple"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="@string/see_all"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/activity_movies_main_rv_toprated"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/dimen_8dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/now_playing"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:id="@+id/activity_movies_main_now_playing_see_all_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:layout_marginEnd="@dimen/dimen_16dp"
-                            android:background="@drawable/ripple"
-                            android:fontFamily="@font/roboto_light"
-                            android:text="@string/see_all"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/darkGrey"
-                            android:textSize="15sp" />
-
-                    </LinearLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/activity_movies_main_rv_nowplaying"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-            </ScrollView>
-
-        </android.support.v4.widget.SwipeRefreshLayout>
-    </LinearLayout>
-
-
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:id="@+id/activity_movies_main_tab_slider_container"/>
 </RelativeLayout>
+
+

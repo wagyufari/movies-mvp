@@ -11,4 +11,13 @@
     <dimen name="dimen_100dp">100dp</dimen>
     <dimen name="text_10sp">10sp</dimen>
     <dimen name="dimen_14dp">14dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_17dp">17dp</dimen>
+    <dimen name="text_14sp">14sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="dimen_64dp">64dp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
 </resources>

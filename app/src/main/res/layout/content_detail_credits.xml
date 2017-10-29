@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="@dimen/dimen_10dp">
+
+    <LinearLayout
+        android:id="@+id/activity_detail_credits_linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_32dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/synopsis"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_32dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
+            android:layout_marginTop="@dimen/dimen_8dp"
+            android:fontFamily="@font/roboto_light"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+</io.codetail.widget.RevealFrameLayout>

@@ -1,6 +1,11 @@
 package com.nacoda.moviesmvpdagger2rxjava.main.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
@@ -45,10 +53,19 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        Glide.with(context).load(IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path()).asBitmap().into(new SimpleTarget<Bitmap>(400, 400) {
+            @Override
+            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                Drawable drawable = new BitmapDrawable(resource);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    holder.listMoviesMainPosterCard.setForeground(drawable);
+                }
+            }
+        });
 
-        String genres = utils.getGenres(moviesListDao.getResults().get(position).getGenre_ids());
+        holder.listMoviesMainTitleTextView.setText(moviesListDao.getResults().get(position).getTitle());
+        holder.listMoviesMainScoreTextView.setText(String.valueOf(moviesListDao.getResults().get(position).getVote_average()));
 
-        gliding.GlideBackdrop(context, IMAGE_URL + moviesListDao.getResults().get(position).getPoster_path(), holder.listMoviesPosterImageView);
 
         holder.click(moviesListDao.getResults().get(position), listener);
 
@@ -60,12 +77,16 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 6;
+        return (moviesListDao.getResults().size() / 2);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.list_movies_poster_image_view)
-        ImageView listMoviesPosterImageView;
+        @BindView(R.id.list_movies_main_poster_card)
+        CardView listMoviesMainPosterCard;
+        @BindView(R.id.list_movies_main_title_text_view)
+        TextView listMoviesMainTitleTextView;
+        @BindView(R.id.list_movies_main_score_text_view)
+        TextView listMoviesMainScoreTextView;
 
         public ViewHolder(View itemView) {
             super(itemView);
