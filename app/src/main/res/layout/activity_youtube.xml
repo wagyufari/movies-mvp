@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.YoutubeActivity">
+    tools:context=".mvp.youtube.YoutubeActivity">
 
     <com.google.android.youtube.player.YouTubePlayerView
         android:id="@+id/youtube_view"

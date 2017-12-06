@@ -1,6 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava;
 
-import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesModel;
+import com.nacoda.moviesmvpdagger2rxjava.mvp.favorites.db.FavoritesModel;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;
 
 /**
@@ -13,7 +13,7 @@ public class Constants {
 
     }
 
-    public static final String BASE_URL = "https://api.themoviedb.org/3/movie/";
+    public static final String BASE_URL = "https://api.themoviedb.org/3/";
 
     public static final String IMAGE_URL = "http://image.tmdb.org/t/p/w780/";
 

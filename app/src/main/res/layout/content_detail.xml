@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main.DetailActivity">
+    tools:context=".mvp.detail.DetailActivity">
 
 
     <io.codetail.widget.RevealFrameLayout
@@ -114,7 +114,7 @@
                     android:layout_marginStart="@dimen/dimen_8dp"
                     android:layout_marginTop="60dp"
                     android:layout_toEndOf="@id/activity_detail_poster_card"
-                    android:elevation="@dimen/dimen_2dp"
+                    android:elevation="@dimen/dimen_4dp"
                     android:fontFamily="@font/roboto_bold"
                     android:text="@string/d_movie_name"
                     android:textColor="@color/colorPrimary"
@@ -130,7 +130,7 @@
                     android:layout_marginEnd="@dimen/dimen_8dp"
                     android:layout_marginStart="@dimen/dimen_8dp"
                     android:layout_toEndOf="@id/activity_detail_poster_card"
-                    android:elevation="@dimen/dimen_2dp"
+                    android:elevation="@dimen/dimen_4dp"
                     android:fontFamily="@font/roboto"
                     android:text="Genres"
                     android:textSize="14sp" />
@@ -143,7 +143,7 @@
                     android:layout_marginStart="@dimen/dimen_8dp"
                     android:layout_marginTop="@dimen/dimen_4dp"
                     android:layout_toEndOf="@id/activity_detail_poster_card"
-                    android:elevation="@dimen/dimen_2dp"
+                    android:elevation="@dimen/dimen_4dp"
                     android:fontFamily="@font/roboto_light"
                     android:text="@string/year"
                     android:textSize="12sp" />
@@ -155,7 +155,7 @@
                     android:layout_alignEnd="@id/activity_detail_content_card"
                     android:layout_alignStart="@id/activity_detail_content_card"
                     android:layout_below="@id/activity_detail_poster_card"
-                    android:elevation="@dimen/dimen_2dp"
+                    android:elevation="@dimen/dimen_4dp"
                     android:orientation="horizontal">
 
                     <android.support.v7.widget.CardView

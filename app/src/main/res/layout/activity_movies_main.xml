@@ -22,8 +22,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@color/white"
                 android:layout_height="match_parent"
+                android:background="@color/white"
                 android:orientation="vertical">
 
                 <TextView
@@ -42,10 +42,31 @@
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#ffffffff">
+
+            <com.gigamole.navigationtabstrip.NavigationTabStrip
+                android:id="@+id/nts"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                app:nts_active_color="@color/colorAccent"
+                app:nts_color="@color/colorAccent"
+                app:nts_corners_radius="1dp"
+                app:nts_size="15sp"
+                app:nts_titles="@array/titles"
+                app:nts_weight="3dp"/>
+
+        </FrameLayout>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/activity_movies_main_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:tabGravity="fill"
             app:tabMode="fixed" />
 

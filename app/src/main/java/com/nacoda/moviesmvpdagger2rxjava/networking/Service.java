@@ -16,6 +16,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.nacoda.moviesmvpdagger2rxjava.Constants;
 import com.nacoda.moviesmvpdagger2rxjava.R;
+import com.nacoda.moviesmvpdagger2rxjava.models.CreditsListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.DetailApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
@@ -77,7 +78,6 @@ public class Service {
                         callback.onSuccess(moviesListDao);
                     }
                 });
-
 
     }
 
@@ -250,6 +250,38 @@ public class Service {
                 });
     }
 
+    public Subscription getCredits(final GetCreditsCallback callback, String movieId) {
+
+        return networkService.getCredits(
+                movieId,
+                Constants.API_KEY
+        )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .onErrorResumeNext(new Func1<Throwable, Observable<? extends CreditsListDao>>() {
+                    @Override
+                    public Observable<? extends CreditsListDao> call(Throwable throwable) {
+                        return Observable.error(throwable);
+                    }
+                })
+                .subscribe(new Subscriber<CreditsListDao>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        callback.onError(new NetworkError(e));
+                    }
+
+                    @Override
+                    public void onNext(CreditsListDao similarListDao) {
+                        callback.onSuccess(similarListDao);
+                    }
+                });
+    }
+
 
     public interface GetPopularCallback {
         void onSuccess(MoviesListDao moviesListDao);
@@ -283,6 +315,12 @@ public class Service {
 
     public interface GetNowPlayingCallback {
         void onSuccess(MoviesListDao moviesListDao);
+
+        void onError(NetworkError networkError);
+    }
+
+    public interface GetCreditsCallback {
+        void onSuccess(CreditsListDao creditsListDao);
 
         void onError(NetworkError networkError);
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:background="@color/colorPrimary"
-    tools:context="com.nacoda.moviesmvpdagger2rxjava.main.FavoritesActivity">
+    tools:context="com.nacoda.moviesmvpdagger2rxjava.mvp.favorites.FavoritesActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_favorites_recycler_view"

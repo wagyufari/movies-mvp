@@ -12,29 +12,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".main.MainMoviesActivity">
-
+        <activity android:name=".mvp.mainmovies.MainMoviesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name=".main.DetailActivity"
+            android:name=".mvp.detail.DetailActivity"
             android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".main.MoviesActivity" />
+        <activity android:name=".mvp.movies.MoviesActivity" />
         <activity
-            android:name=".main.YoutubeActivity"
+            android:name=".mvp.youtube.YoutubeActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".main.FavoritesActivity">
-
-        </activity>
+        <activity android:name=".mvp.favorites.FavoritesActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".mvp.search.SearchActivity" />
+        <activity android:name=".mvp.search.SearchDetailActivity"></activity>
     </application>
 
 </manifest>

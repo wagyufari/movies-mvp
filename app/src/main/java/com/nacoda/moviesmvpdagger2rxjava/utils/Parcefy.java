@@ -1,6 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.utils;
 
-import com.nacoda.moviesmvpdagger2rxjava.main.db.FavoritesModel;
+import com.nacoda.moviesmvpdagger2rxjava.mvp.favorites.db.FavoritesModel;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.ParcelableMovies;

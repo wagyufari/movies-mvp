@@ -1,5 +1,6 @@
 package com.nacoda.moviesmvpdagger2rxjava.models;
 
+
 import java.util.List;
 
 /**
