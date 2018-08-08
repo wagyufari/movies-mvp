@@ -14,11 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.appolica.flubber.Flubber;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
+import com.daimajia.androidanimations.library.Techniques;
 import com.nacoda.moviesmvpdagger2rxjava.R;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesApiDao;
 import com.nacoda.moviesmvpdagger2rxjava.models.MoviesListDao;
@@ -74,7 +76,9 @@ public class MoviesMainAdapter extends RecyclerView.Adapter<MoviesMainAdapter.Vi
         holder.listMoviesMainYearTextView.setText(moviesListDao.getResults().get(position).getRelease_date().substring(0, 4));
 
         holder.click(moviesListDao.getResults().get(position), holder.listMoviesMainPosterCard, listener);
-        AnimationHelper.onSlideAnim(holder.listMoviesMainContentLinear);
+//        AnimationHelper.onSlideAnim(holder.listMoviesMainContentLinear);
+        utils.flubber(holder.listMoviesMainContentLinear, Integer.valueOf(String.valueOf(position + 1)+"200"), Flubber.AnimationPreset.SLIDE_LEFT);
+
 
     }
 

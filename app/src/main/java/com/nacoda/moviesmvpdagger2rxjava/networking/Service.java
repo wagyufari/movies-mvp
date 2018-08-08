@@ -253,9 +253,8 @@ public class Service {
     public Subscription getCredits(final GetCreditsCallback callback, String movieId) {
 
         return networkService.getCredits(
-                movieId,
-                Constants.API_KEY
-        )
+                movieId
+                )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorResumeNext(new Func1<Throwable, Observable<? extends CreditsListDao>>() {

@@ -60,8 +60,7 @@ public interface NetworkService {
 
     @GET("{movieId}/casts")
     Observable<CreditsListDao> getCredits(
-            @Path("movieId") String movieId,
-            @Path("api_key") String api_key
+            @Path("movieId") String movieId
     );
 
 }
